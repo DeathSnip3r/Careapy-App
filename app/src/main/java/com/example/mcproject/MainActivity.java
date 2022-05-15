@@ -14,5 +14,7 @@ public class MainActivity extends AppCompatActivity {
         int test2;
         int test3;
         double test4;
+        String MiguelIsAWanker;
+        MiguelIsAWanker="Im a big boy";
     }
 }
