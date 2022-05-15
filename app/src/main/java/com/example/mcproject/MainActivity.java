@@ -10,12 +10,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String test;
-        int test2;
-        int test3;
-        double test4;
-        String MiguelIsAWanker;
-        MiguelIsAWanker="Im a big boy";
-        String AidanTest;
     }
 }
