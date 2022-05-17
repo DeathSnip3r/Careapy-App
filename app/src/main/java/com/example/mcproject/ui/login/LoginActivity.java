@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,8 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcproject.R;
-import com.example.mcproject.ui.login.LoginViewModel;
-import com.example.mcproject.ui.login.LoginViewModelFactory;
+import com.example.mcproject.RegisterActivityClient;
 import com.example.mcproject.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void RegisterClick(View v){
-        
+        Intent i = new Intent(this, RegisterActivityClient.class);
+        startActivity(i);
     }
 }
