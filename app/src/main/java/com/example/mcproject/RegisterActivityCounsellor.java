@@ -14,18 +14,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.mcproject.ui.main.SectionsPagerAdapter;
-import com.example.mcproject.databinding.ActivityRegisterClientBinding;
+import com.example.mcproject.databinding.ActivityRegisterCounsellorBinding;
 
-public class RegisterActivityClient extends AppCompatActivity {
+public class RegisterActivityCounsellor extends AppCompatActivity {
 
-    private ActivityRegisterClientBinding binding;
-
+    private ActivityRegisterCounsellorBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityRegisterClientBinding.inflate(getLayoutInflater());
+        binding = ActivityRegisterCounsellorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -34,14 +33,9 @@ public class RegisterActivityClient extends AppCompatActivity {
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
 
-        sectionsPagerAdapter.add(new F1Client());
-        sectionsPagerAdapter.add(new F2Client());
-        sectionsPagerAdapter.add(new F3Client());
-
-
-
-
-
+        SectionsPagerAdapter.add(new F1Client());
+        SectionsPagerAdapter.add(new F2Client());
+        SectionsPagerAdapter.add(new F3Client());
 
 
     }

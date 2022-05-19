@@ -10,14 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mcproject" >
         <activity
-            android:name=".RegisterActivityClient"
+            android:name=".RegisterActivityCounsellor"
             android:exported="false"
-            android:label="@string/title_activity_register_client"
+            android:label="@string/title_activity_register_counsellor"
             android:theme="@style/Theme.Mcproject.NoActionBar" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" >
