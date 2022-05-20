@@ -26,8 +26,8 @@ public class F1Client extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_f1_client, container, false);
         Spinner  spinnerLanguages= rootView.findViewById(R.id.spinnerLanguage);
 
-       // ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(, R.array.languages, android.R.layout.simple_spinner_item);
-       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(, R.array.languages, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
 
         return inflater.inflate(R.layout.fragment_f1_client, container, false);
