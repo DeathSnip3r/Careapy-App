@@ -79,20 +79,24 @@
             android:textColor="@color/primary_text"
             android:textSize="@dimen/_13ssp" />
 
-        <EditText
-            android:id="@+id/inputEmail"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/background_input"
-            android:hint="Email"
-            android:imeOptions="actionNext"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/_16sdp"
-            android:paddingEnd="@dimen/_16sdp"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/_13ssp" />
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/background_input"
+                android:hint="Email"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/_16sdp"
+                android:paddingEnd="@dimen/_16sdp"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_13ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -187,7 +191,29 @@
             android:paddingTop="@dimen/_20sdp">
 
             <TextView
-                android:id="@+id/inputAge"
+                android:id="@+id/inputGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Select Your Gender"
+                android:importantForAutofill="no"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_13ssp" />
+
+            <Spinner
+                android:id="@+id/inputSpinnerGender"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawSelectorOnTop="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/txtAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/select_your_age"
@@ -195,11 +221,11 @@
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_13ssp" />
 
-            <Spinner
-                android:id="@+id/inputSpinnerAge"
+            <EditText
+                android:id="@+id/inputAge"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:drawSelectorOnTop="true" />
+                android:inputType = "number"/>
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton

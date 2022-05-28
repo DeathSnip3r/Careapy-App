@@ -8,7 +8,7 @@
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
     android:scrollbars="none"
-    tools:context=".activities.RegisterActivityCounsellor">
+    tools:context=".activities.clientProblems">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,19 +34,19 @@
             />
 
         <CheckBox
-            android:id="@+id/cbxAnxiety"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:checked="false"
-            android:text="@string/anxiety"
-            android:textSize="@dimen/_16sdp" />
-
-        <CheckBox
             android:id="@+id/cbxAnger"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:checked="false"
             android:text="@string/anger_management"
+            android:textSize="@dimen/_16sdp" />
+
+        <CheckBox
+            android:id="@+id/cbxAnxiety"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/anxiety"
             android:textSize="@dimen/_16sdp" />
 
         <CheckBox
@@ -134,5 +134,24 @@
             android:checked="false"
             android:text="@string/stress"
             android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxTrauma"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/trauma_and_abuse"
+            android:textSize="@dimen/_16sdp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegClientProblems"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/next"
+            android:onClick="FinishRegClient"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_8ssp" />
     </LinearLayout>
 </ScrollView>
