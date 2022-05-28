@@ -10,13 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.mcproject.R;
 
 public class RegisterActivityClient extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     String[] languages = {"English","Afrikaans","Xhosa","Zulu","Tswana","Ndebele","Tsonga","Swati"};
-    String[] Religion = {"Christian", "Islam", "Hinduism", "Judaism","Buddhism","No Religion"};
+    String[] Religion = {"Christian", "Islam", "Hinduism", "Judaism","Buddhism","None"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +60,9 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
 
     }
 
-    public void CounProblemPage(View v){
-        Button next= (Button) findViewById(R.id.btnClientProblem);
-        next.setOnClickListener(new View.OnClickListener() {
+    public void ClientProblemPage(View v){
+        Button prob= (Button) findViewById(R.id.btnClientProblem);
+        prob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create the intent which will start your new activity.

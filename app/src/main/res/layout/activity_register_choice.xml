@@ -9,6 +9,7 @@
         android:id="@+id/btnClient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="RegClient"
         android:text="For Myself"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
