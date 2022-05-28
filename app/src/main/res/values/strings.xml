@@ -39,4 +39,20 @@
     <string name="select_language">Select Language</string>
     <string name="select_your_age">Select Your Age</string>
     <string name="next">Next</string>
+    <string name="what_led_you_to_consider_counselling_today">What led you to consider counselling today?</string>
+    <string name="addiction">Addiction</string>
+    <string name="anxiety">Anxiety</string>
+    <string name="anger_management">Anger Management</string>
+    <string name="career_difficulties">Career Difficulties</string>
+    <string name="depression">Depression</string>
+    <string name="eating_disorders">Eating Disorders</string>
+    <string name="family_conflict">Family Conflict</string>
+    <string name="grief_and_loss">Grief and Loss</string>
+    <string name="lgbtq_related_issues">LGBTQ-Related issues</string>
+    <string name="mental_illness">Mental illness</string>
+    <string name="parenting_issues">Parenting Issues</string>
+    <string name="relationship_issues">Relationship issues</string>
+    <string name="self_esteem_issues">Self esteem issues</string>
+    <string name="sleeping_disorders">Sleeping disorders</string>
+    <string name="stress">Stress</string>
 </resources>

@@ -32,6 +32,20 @@ public class RegisterActivityChoice extends AppCompatActivity {
         });
 
     }
+
+    public void RegClient(View v){
+        Button regClient= (Button) findViewById(R.id.btnClient);
+        regClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create the intent which will start your new activity.
+                Intent RegisterClient = new Intent(RegisterActivityChoice.this, RegisterActivityClient.class);
+                // Start the new activity.
+                startActivity(RegisterClient);
+            }
+        });
+
+    }
 }
 
 

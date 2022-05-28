@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:overScrollMode="never"
+    android:padding="@dimen/_24sdp"
+    android:scrollbars="none"
+    tools:context=".activities.RegisterActivityCounsellor">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:text="@string/what_led_you_to_consider_counselling_today"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/cbxAddiction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/addiction"
+            android:textSize="@dimen/_16sdp"
+            />
+
+        <CheckBox
+            android:id="@+id/cbxAnxiety"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/anxiety"
+            android:textSize="@dimen/_16sdp" />
+
+        <CheckBox
+            android:id="@+id/cbxAnger"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/anger_management"
+            android:textSize="@dimen/_16sdp" />
+
+        <CheckBox
+            android:id="@+id/cbxCareer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/career_difficulties"
+            android:textSize="@dimen/_16sdp"/>
+
+        <CheckBox
+            android:id="@+id/cbxDepression"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/depression"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxEating"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/eating_disorders"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxFamily"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/family_conflict"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxGrief"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/grief_and_loss"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxLGBTQ"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/lgbtq_related_issues"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxMental"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/mental_illness"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxParenting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/parenting_issues"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxRelationship"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/relationship_issues"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxSelf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/self_esteem_issues"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxSleeping"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/sleeping_disorders"
+            android:textSize="@dimen/_16sdp" />
+        <CheckBox
+            android:id="@+id/cbxStress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="@string/stress"
+            android:textSize="@dimen/_16sdp" />
+    </LinearLayout>
+</ScrollView>
