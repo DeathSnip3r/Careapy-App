@@ -116,16 +116,6 @@
             android:textStyle="bold"
             app:cornerRadius="@dimen/_8ssp" />
 
-        <TextView
-            android:id="@+id/plswork"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10ssp"
-            android:gravity="center_horizontal"
-            android:text="@string/or"
-            android:textColor="@color/secondary_text" />
-
     </LinearLayout>
 
 </ScrollView>

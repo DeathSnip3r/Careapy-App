@@ -24,8 +24,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class SignInActivity extends AppCompatActivity {
-    String Logged;
-    private TextView testTextview;
+    //String Logged = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +32,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void ClientLogin(String Username, String Password){
+
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/client_login.php?").newBuilder();
@@ -52,21 +52,29 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()){
-                    String myResponse = response.body().string();
+
+                    final String myResponse = response.body().string();
                     SignInActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            testTextview.setText(myResponse);
+
+                            if (myResponse.equals("failure")){
+                                Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
+                                startActivity(newAcc);
+                            }
+
                         }
                     });
-                }
+
             }
         });
-
     }
 
     public void CounsellorLogin(String Username, String Password){
+
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/counsellor_login.php?").newBuilder();
@@ -83,11 +91,26 @@ public class SignInActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 e.printStackTrace();
             }
+
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()){
-                    Logged = response.body().string();
-                }
+
+                final String myResponse = response.body().string();
+                SignInActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (myResponse.equals("failure")){
+                            Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
+                            startActivity(newAcc);
+                        }
+
+                    }
+                });
+
             }
         });
 
@@ -99,32 +122,19 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String Username;
                 String Password;
-                String fail = "failure";
+
                 EditText UsernameText = (EditText)findViewById(R.id.inputUsername);
                 EditText PasswordText = (EditText)findViewById(R.id.inputPassword);
                 Username= UsernameText.getText().toString();
                 Password= PasswordText.getText().toString();
 
+
+
                 if (Username.indexOf('@')==-1){
-                    //its a client
-                    ClientLogin(Username,Password);
-                    if (Logged.equals("failure")){
-                        Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
-                    }
-                    else{
-                        Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
-                        startActivity(newAcc);
-                    }
+                    ClientLogin(Username, Password);
                 }
                 else{
-                    CounsellorLogin(Username,Password);
-                    if (Logged.equals("fai")){
-                        Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
-                    }
-                    else{
-                        Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
-                        startActivity(newAcc);
-                    }
+                   CounsellorLogin(Username,Password);
                 }
             }
         });
