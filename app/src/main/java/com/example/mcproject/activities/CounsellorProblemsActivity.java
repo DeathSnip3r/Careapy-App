@@ -22,14 +22,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class CounsellorProblemsActivity extends AppCompatActivity {
-
-    String Counsellor_ID ="4";
+    String Counsellor_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counsellor_problems);
         Intent regAcc = getIntent();
+        Counsellor_ID = regAcc.getStringExtra("Counsellor_ID");
 
     }
     public void FinishRegCoun(View v){
@@ -37,6 +37,8 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
         prob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 String problem;
                 int Count=0;
                 CheckBox ADD = (CheckBox) findViewById(R.id.cbxAddiction);
@@ -141,7 +143,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
                 }
                 else {
                     // Create the intent which will start your new activity.
-                    Intent RegCoun = new Intent(CounsellorProblemsActivity.this, ChatScreen.class);
+                    Intent RegCoun = new Intent(CounsellorProblemsActivity.this, SignInActivity.class);
                     // Start the new activity.
                     startActivity(RegCoun);
                 }

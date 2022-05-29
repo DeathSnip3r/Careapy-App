@@ -169,9 +169,10 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
                             Intent ClientProblems = new Intent(RegisterActivityClient.this, clientProblems.class);
                             ClientProblems .putExtra("Client_ID", Client_ID);
                             ClientProblems .putExtra("Client_Religion_Selected", religion);
+                            ClientProblems .putExtra("Client_Language", language);
 
                             // Start the new activity.
-                            startActivity(ClientProblems );
+                            startActivity(ClientProblems);
                         }
                     }
                 });

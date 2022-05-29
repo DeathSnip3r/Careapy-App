@@ -120,14 +120,14 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
 
 
                 blnValidInput = ValidateFields(Name,Surname,Email,Password,ConfirmPassword,Language, Religion, Gender, Age);
-                if(blnValidInput == true){
+                if(blnValidInput){
                     if(!Password.equals(ConfirmPassword)){
                         Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
                         PasswordText.setText(null);
                         ConfirmPasswordText.setText(null);
                     }
                     else{
-                        addCounsellor(Email,Password,Name,Surname,Gender,Age, Religion,Language);
+                        addCounsellor(Name,Surname,Email,Password,Language,Religion,Gender,Age);
                     }
 
                 }
@@ -182,7 +182,8 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                               String language, String religion, String gender, String age)
     {
         OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/counsellor_problems.php?").newBuilder();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/counsellor_signup.php?").newBuilder();
         urlBuilder.addQueryParameter("Counsellor_Email", email);
         urlBuilder.addQueryParameter("Counsellor_Password", password);
         urlBuilder.addQueryParameter("First_Names", name);
@@ -209,7 +210,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                 RegisterActivityCounsellor.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        // !!!!!!!!!!!!!UPDATE PHP!!!!!!!!!!!! for new text
+                        
                         if (myResponse.equals("Email already logged on system")){
                             Toast.makeText(getApplicationContext(), myResponse, Toast.LENGTH_LONG).show();
                         }
