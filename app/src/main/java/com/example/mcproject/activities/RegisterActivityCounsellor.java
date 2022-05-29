@@ -97,41 +97,37 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
             public void onClick(View v) {
                 boolean blnValidInput = true;
 
-                EditText First_Names = (EditText) findViewById(R.id.inputFirstNames);
-                EditText Surname = (EditText) findViewById(R.id.inputSurname);
-                EditText Counsellor_Email = (EditText) findViewById(R.id.inputEmail);
-                EditText Counsellor_Password = (EditText) findViewById(R.id.inputPassword);
-                Spinner Languages = (Spinner) findViewById(R.id.inputSpinnerLanguage);
-                Spinner Religion = (Spinner) findViewById(R.id.inputSpinnerReligion);
-                Spinner Gender = (Spinner) findViewById(R.id.inputSpinnerGender);
-                EditText Age = (EditText) findViewById(R.id.inputAge);
-                EditText ConfirmPass = (EditText) findViewById(R.id.inputConfirmPassword);
+                EditText NameText = (EditText) findViewById(R.id.inputFirstNames);
+                EditText SurnameText = (EditText) findViewById(R.id.inputSurname);
+                EditText EmailText = (EditText) findViewById(R.id.inputEmail);
+                EditText PasswordText= (EditText) findViewById(R.id.inputPassword);
+                EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
+                Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
+                Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
+                Spinner GenderSpin = (Spinner) findViewById(R.id.inputSpinnerGender);
+                EditText AgeText = (EditText) findViewById(R.id.inputAge);
 
-                String FName = First_Names.getText().toString();
-                String SName = Surname.getText().toString();
-                String CounEmail = Counsellor_Email.getText().toString();
-                String CounPass = Counsellor_Password.getText().toString();
-                String Lang = Languages.getSelectedItem().toString();
-                String Relig = Religion.getSelectedItem().toString();
-                String Gen = Gender.getSelectedItem().toString();
-                String age = Age.getText().toString();
-                String confirmPass = ConfirmPass.getText().toString();
 
-                blnValidInput = ValidateFields(FName,SName,CounEmail,CounPass,confirmPass,Lang, Relig, Gen, age);
+                String Name = NameText.getText().toString();
+                String Surname = SurnameText.getText().toString();
+                String Email = EmailText.getText().toString();
+                String Password = PasswordText.getText().toString();
+                String ConfirmPassword = ConfirmPasswordText.getText().toString();
+                String Language = LanguageSpin.getSelectedItem().toString();
+                String Religion = ReligionSpin.getSelectedItem().toString();
+                String Gender = GenderSpin.getSelectedItem().toString();
+                String Age = AgeText.getText().toString();
+
+
+                blnValidInput = ValidateFields(Name,Surname,Email,Password,ConfirmPassword,Language, Religion, Gender, Age);
                 if(blnValidInput == true){
-                    if(CounPass != confirmPass){
-                        Toast.makeText(getApplicationContext(), "Password do not match", Toast.LENGTH_LONG).show();
-                        Counsellor_Password.setText(null);
-                        ConfirmPass.setText(null);
+                    if(!Password.equals(ConfirmPassword)){
+                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                        PasswordText.setText(null);
+                        ConfirmPasswordText.setText(null);
                     }
                     else{
-                        addCounsellor(CounEmail,CounPass,FName,SName,Gen,age, Relig,Lang);
-                        String Counsellor_ID = "4";
-                        // Create the intent which will start your new activity.
-                        Intent CounProbs = new Intent(RegisterActivityCounsellor.this, CounsellorProblemsActivity.class);
-                        CounProbs.putExtra("Counsellor_ID", Counsellor_ID);
-                        // Start the new activity.
-                        startActivity(CounProbs);
+                        addCounsellor(Email,Password,Name,Surname,Gender,Age, Religion,Language);
                     }
 
                 }
@@ -140,64 +136,61 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
         });
     }
 
-    public boolean ValidateFields(String First_Names, String Surname, String Counsellor_Email, String Counsellor_Password,
-                                  String ConfirmPass,String Languages, String Religion, String Gender, String Age)
+    public boolean ValidateFields(String name, String surname, String email, String password,
+                                  String confirmpassword,String language, String religion, String gender, String age)
     {
-
-        if(First_Names.equals("")){
+        if(name.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter in your First Names", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Surname.equals("")){
+        if(surname.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter in your Surname", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Counsellor_Email.equals("")){
+        if(email.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter in your Email", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Counsellor_Password.equals("")){
+        if(password.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter in a Password", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(ConfirmPass.equals("")){
-            Toast.makeText(getApplicationContext(), "Please Confirm Password", Toast.LENGTH_LONG).show();
+        if(confirmpassword.equals("")){
+            Toast.makeText(getApplicationContext(), "Please confirm your Password", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Languages.equals("")){
+        if(language.equals("")){
             Toast.makeText(getApplicationContext(), "Please select a Language", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Religion.equals("")){
+        if(religion.equals("")){
             Toast.makeText(getApplicationContext(), "Please select a Religion", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Gender.equals("")){
+        if(gender.equals("")){
             Toast.makeText(getApplicationContext(), "Please select a Gender", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(Age.equals("")){
-            Toast.makeText(getApplicationContext(), "Please enter in an Age", Toast.LENGTH_LONG).show();
+        if(age.equals("")){
+            Toast.makeText(getApplicationContext(), "Please enter in your Age", Toast.LENGTH_LONG).show();
             return false;
         }
-        else{
             return true;
-        }
     }
 
-    public void addCounsellor(String Counsellor_Email,String Password,String firstName,String surname,String Gender,
-                              String Age,String Relig,String Lang)
+    public void addCounsellor(String name, String surname, String email, String password,
+                              String language, String religion, String gender, String age)
     {
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/counsellor_problems.php?").newBuilder();
-        urlBuilder.addQueryParameter("Counsellor_Email", Counsellor_Email);
-        urlBuilder.addQueryParameter("Counsellor_Password", Password);
-        urlBuilder.addQueryParameter("First_Names", firstName);
+        urlBuilder.addQueryParameter("Counsellor_Email", email);
+        urlBuilder.addQueryParameter("Counsellor_Password", password);
+        urlBuilder.addQueryParameter("First_Names", name);
         urlBuilder.addQueryParameter("Surname", surname);
-        urlBuilder.addQueryParameter("Gender", Gender);
-        urlBuilder.addQueryParameter("Age", Age);
-        urlBuilder.addQueryParameter("Religion", Relig);
-        urlBuilder.addQueryParameter("Languages", Lang);
+        urlBuilder.addQueryParameter("Gender", gender);
+        urlBuilder.addQueryParameter("Age", age);
+        urlBuilder.addQueryParameter("Religion", religion);
+        urlBuilder.addQueryParameter("Languages", language);
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
@@ -212,6 +205,23 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+                RegisterActivityCounsellor.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // !!!!!!!!!!!!!UPDATE PHP!!!!!!!!!!!! for new text
+                        if (myResponse.equals("Email already logged on system")){
+                            Toast.makeText(getApplicationContext(), myResponse, Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            String Counsellor_ID = myResponse;
+                            Intent CounProbs = new Intent(RegisterActivityCounsellor.this, CounsellorProblemsActivity.class);
+                            CounProbs.putExtra("Counsellor_ID", Counsellor_ID);
+                            // Start the new activity.
+                            startActivity(CounProbs);
+                        }
+                    }
+                });
 
             }
         });
