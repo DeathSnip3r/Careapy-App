@@ -93,7 +93,7 @@
                 android:id="@+id/inputLanguage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Select Preferred Language?"
+                android:hint="Select Language"
                 android:importantForAutofill="no"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_13ssp" />

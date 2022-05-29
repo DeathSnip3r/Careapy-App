@@ -57,7 +57,6 @@ public class SignInActivity extends AppCompatActivity {
                     SignInActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             if (myResponse.equals("failure")){
                                 Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                             }
@@ -65,7 +64,6 @@ public class SignInActivity extends AppCompatActivity {
                                 Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
                                 startActivity(newAcc);
                             }
-
                         }
                     });
 
@@ -100,14 +98,13 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        if (myResponse.equals("failure")){
+                        if (myResponse.equals("failure\n")){
                             Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                         }
                         else{
                             Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
                             startActivity(newAcc);
                         }
-
                     }
                 });
 
@@ -130,11 +127,11 @@ public class SignInActivity extends AppCompatActivity {
 
 
 
-                if (Username.indexOf('@')==-1){
-                    ClientLogin(Username, Password);
+                if (Username.indexOf('@')>=0){
+                    CounsellorLogin(Username,Password);
                 }
                 else{
-                   CounsellorLogin(Username,Password);
+                   ClientLogin(Username, Password);
                 }
             }
         });
