@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 
 import com.example.mcproject.R;
+import com.example.mcproject.databinding.ActivityChatScreenBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -23,6 +26,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
+
+    private PreferenceManager preferenceManager;
+
     String Chat_ID="3";
     String Current_ID;
     String User_ID;
@@ -99,5 +105,9 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
             });
+        }
+
+        private void init(){
+        
         }
     }
