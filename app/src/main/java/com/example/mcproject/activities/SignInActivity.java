@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.mcproject.R;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,7 +60,7 @@ public class SignInActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                             }
                             else{
-                                Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
+                                Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
                                 startActivity(newAcc);
                             }
                         }
@@ -102,7 +101,7 @@ public class SignInActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
+                            Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
                             startActivity(newAcc);
                         }
                     }

@@ -141,7 +141,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
                 }
                 else {
                     // Create the intent which will start your new activity.
-                    Intent RegCoun = new Intent(CounsellorProblemsActivity.this, ChatScreen.class);
+                    Intent RegCoun = new Intent(CounsellorProblemsActivity.this, ChatActivity.class);
                     // Start the new activity.
                     startActivity(RegCoun);
                 }

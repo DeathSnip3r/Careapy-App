@@ -23,7 +23,7 @@ public class clientProblems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Create the intent which will start your new activity.
-                Intent problemClient = new Intent(clientProblems.this, ChatScreen.class);
+                Intent problemClient = new Intent(clientProblems.this, ChatActivity.class);
                 // Start the new activity.
                 startActivity(problemClient);
             }
