@@ -36,11 +36,8 @@ public class clientProblems extends AppCompatActivity {
         Language = regAcc.getStringExtra("Client_Language");
     }
     public void FinishRegClient(View v){
-        Button problem= (Button) findViewById(R.id.btnRegClientProblems);
-        problem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create the intent which will start your new activity.
+
+    
                 String problem;
                 int Count=0;
                 CheckBox ADD = (CheckBox) findViewById(R.id.cbxAddiction);
@@ -153,6 +150,7 @@ public class clientProblems extends AppCompatActivity {
                 }
             }
         });
+
     }
     public void addproblem(String Problem){
         OkHttpClient client = new OkHttpClient();

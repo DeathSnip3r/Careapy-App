@@ -1,10 +1,8 @@
 package com.example.mcproject.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,11 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mcproject.R;
 
 import java.io.IOException;
 
-import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -91,49 +92,40 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
     }
 
     public void CounProblemPage(View v){
-        Button next= (Button) findViewById(R.id.btnCounProblem);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean blnValidInput = true;
 
-                EditText NameText = (EditText) findViewById(R.id.inputFirstNames);
-                EditText SurnameText = (EditText) findViewById(R.id.inputSurname);
-                EditText EmailText = (EditText) findViewById(R.id.inputEmail);
-                EditText PasswordText= (EditText) findViewById(R.id.inputPassword);
-                EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
-                Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
-                Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
-                Spinner GenderSpin = (Spinner) findViewById(R.id.inputSpinnerGender);
-                EditText AgeText = (EditText) findViewById(R.id.inputAge);
+        boolean blnValidInput = true;
 
+        EditText NameText = (EditText) findViewById(R.id.inputFirstNames);
+        EditText SurnameText = (EditText) findViewById(R.id.inputSurname);
+        EditText EmailText = (EditText) findViewById(R.id.inputEmail);
+        EditText PasswordText= (EditText) findViewById(R.id.inputPassword);
+        EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
+        Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
+        Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
+        Spinner GenderSpin = (Spinner) findViewById(R.id.inputSpinnerGender);
+        EditText AgeText = (EditText) findViewById(R.id.inputAge);
 
-                String Name = NameText.getText().toString();
-                String Surname = SurnameText.getText().toString();
-                String Email = EmailText.getText().toString();
-                String Password = PasswordText.getText().toString();
-                String ConfirmPassword = ConfirmPasswordText.getText().toString();
-                String Language = LanguageSpin.getSelectedItem().toString();
-                String Religion = ReligionSpin.getSelectedItem().toString();
-                String Gender = GenderSpin.getSelectedItem().toString();
-                String Age = AgeText.getText().toString();
+        String Name = NameText.getText().toString();
+        String Surname = SurnameText.getText().toString();
+        String Email = EmailText.getText().toString();
+        String Password = PasswordText.getText().toString();
+        String ConfirmPassword = ConfirmPasswordText.getText().toString();
+        String Language = LanguageSpin.getSelectedItem().toString();
+        String Religion = ReligionSpin.getSelectedItem().toString();
+        String Gender = GenderSpin.getSelectedItem().toString();
+        String Age = AgeText.getText().toString();
 
-
-                blnValidInput = ValidateFields(Name,Surname,Email,Password,ConfirmPassword,Language, Religion, Gender, Age);
-                if(blnValidInput){
-                    if(!Password.equals(ConfirmPassword)){
-                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
-                        PasswordText.setText(null);
-                        ConfirmPasswordText.setText(null);
-                    }
-                    else{
-                        addCounsellor(Name,Surname,Email,Password,Language,Religion,Gender,Age);
-                    }
-
-                }
-
+        blnValidInput = ValidateFields(Name,Surname,Email,Password,ConfirmPassword,Language, Religion, Gender, Age);
+        if(blnValidInput == true){
+            if(!Password.equals(ConfirmPassword)){
+                Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                PasswordText.setText(null);
+                ConfirmPasswordText.setText(null);
             }
-        });
+            else{
+                addCounsellor(Email,Password,Name,Surname,Gender,Age, Religion,Language);
+            }
+        }
     }
 
     public boolean ValidateFields(String name, String surname, String email, String password,
@@ -200,12 +192,12 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+            public void onFailure(@NonNull okhttp3.Call call, @NonNull IOException e) {
                 e.printStackTrace();
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull okhttp3.Call call, @NonNull Response response) throws IOException {
                 final String myResponse = response.body().string();
                 RegisterActivityCounsellor.this.runOnUiThread(new Runnable() {
                     @Override

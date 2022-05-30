@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.example.mcproject.R;
 
-public class ChatScreen extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

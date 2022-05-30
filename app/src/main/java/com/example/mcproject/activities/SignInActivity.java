@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.mcproject.R;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,7 +60,7 @@ public class SignInActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                             }
                             else{
-                                Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
+                                Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
                                 startActivity(newAcc);
                             }
                         }
@@ -102,7 +101,7 @@ public class SignInActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                         }
                         else{
-                            Intent newAcc = new Intent(SignInActivity.this, ChatScreen.class);
+                            Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
                             startActivity(newAcc);
                         }
                     }
@@ -113,41 +112,25 @@ public class SignInActivity extends AppCompatActivity {
 
     }
     public void Login(View v) {
-        Button login = (Button) findViewById(R.id.buttonSignIn);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String Username;
-                String Password;
+        String Username;
+        String Password;
 
-                EditText UsernameText = (EditText)findViewById(R.id.inputUsername);
-                EditText PasswordText = (EditText)findViewById(R.id.inputPassword);
-                Username= UsernameText.getText().toString();
-                Password= PasswordText.getText().toString();
+        EditText UsernameText = (EditText)findViewById(R.id.inputUsername);
+        EditText PasswordText = (EditText)findViewById(R.id.inputPassword);
+        Username= UsernameText.getText().toString();
+        Password= PasswordText.getText().toString();
 
-
-
-                if (Username.indexOf('@')>=0){
-                    CounsellorLogin(Username,Password);
-                }
-                else{
-                   ClientLogin(Username, Password);
-                }
-            }
-        });
-
+        if (Username.indexOf('@')>=0){
+            CounsellorLogin(Username,Password);
+        }
+        else{
+            ClientLogin(Username, Password);
+        }
     }
     public void CreateNewAccount (View v){
-        TextView CreateAcc = (TextView)findViewById(R.id.textSignInCreateNewAccount);
-        CreateAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create the intent which will start your new activity.
-                Intent newAcc = new Intent(SignInActivity.this, RegisterActivityChoice.class);
-
-                // Start the new activity.
-                startActivity(newAcc);
-            }
-        });
+        // Create the intent which will start your new activity.
+        Intent newAcc = new Intent(SignInActivity.this, RegisterActivityChoice.class);
+        // Start the new activity.
+        startActivity(newAcc);
     }
 }
