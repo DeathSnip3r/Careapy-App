@@ -92,49 +92,39 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
     }
 
     public void CounProblemPage(View v){
-        Button next= (Button) findViewById(R.id.btnCounProblem);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean blnValidInput = true;
+        boolean blnValidInput = true;
 
-                EditText NameText = (EditText) findViewById(R.id.inputFirstNames);
-                EditText SurnameText = (EditText) findViewById(R.id.inputSurname);
-                EditText EmailText = (EditText) findViewById(R.id.inputEmail);
-                EditText PasswordText= (EditText) findViewById(R.id.inputPassword);
-                EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
-                Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
-                Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
-                Spinner GenderSpin = (Spinner) findViewById(R.id.inputSpinnerGender);
-                EditText AgeText = (EditText) findViewById(R.id.inputAge);
+        EditText NameText = (EditText) findViewById(R.id.inputFirstNames);
+        EditText SurnameText = (EditText) findViewById(R.id.inputSurname);
+        EditText EmailText = (EditText) findViewById(R.id.inputEmail);
+        EditText PasswordText= (EditText) findViewById(R.id.inputPassword);
+        EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
+        Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
+        Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
+        Spinner GenderSpin = (Spinner) findViewById(R.id.inputSpinnerGender);
+        EditText AgeText = (EditText) findViewById(R.id.inputAge);
 
+        String Name = NameText.getText().toString();
+        String Surname = SurnameText.getText().toString();
+        String Email = EmailText.getText().toString();
+        String Password = PasswordText.getText().toString();
+        String ConfirmPassword = ConfirmPasswordText.getText().toString();
+        String Language = LanguageSpin.getSelectedItem().toString();
+        String Religion = ReligionSpin.getSelectedItem().toString();
+        String Gender = GenderSpin.getSelectedItem().toString();
+        String Age = AgeText.getText().toString();
 
-                String Name = NameText.getText().toString();
-                String Surname = SurnameText.getText().toString();
-                String Email = EmailText.getText().toString();
-                String Password = PasswordText.getText().toString();
-                String ConfirmPassword = ConfirmPasswordText.getText().toString();
-                String Language = LanguageSpin.getSelectedItem().toString();
-                String Religion = ReligionSpin.getSelectedItem().toString();
-                String Gender = GenderSpin.getSelectedItem().toString();
-                String Age = AgeText.getText().toString();
-
-
-                blnValidInput = ValidateFields(Name,Surname,Email,Password,ConfirmPassword,Language, Religion, Gender, Age);
-                if(blnValidInput == true){
-                    if(!Password.equals(ConfirmPassword)){
-                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
-                        PasswordText.setText(null);
-                        ConfirmPasswordText.setText(null);
-                    }
-                    else{
-                        addCounsellor(Email,Password,Name,Surname,Gender,Age, Religion,Language);
-                    }
-
-                }
-
+        blnValidInput = ValidateFields(Name,Surname,Email,Password,ConfirmPassword,Language, Religion, Gender, Age);
+        if(blnValidInput == true){
+            if(!Password.equals(ConfirmPassword)){
+                Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                PasswordText.setText(null);
+                ConfirmPasswordText.setText(null);
             }
-        });
+            else{
+                addCounsellor(Email,Password,Name,Surname,Gender,Age, Religion,Language);
+            }
+        }
     }
 
     public boolean ValidateFields(String name, String surname, String email, String password,

@@ -72,45 +72,36 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
     }
 
     public void ClientProblemPage(View v){
-        Button prob= (Button) findViewById(R.id.btnClientProblem);
-        prob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean blnValidInput = true;
+        boolean blnValidInput = true;
 
-                EditText UsernameText = (EditText) findViewById(R.id.inputFirstNames);
-                EditText PasswordText = (EditText) findViewById(R.id.inputPassword);
-                EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
-                Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
-                Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
+        EditText UsernameText = (EditText) findViewById(R.id.inputFirstNames);
+        EditText PasswordText = (EditText) findViewById(R.id.inputPassword);
+        EditText ConfirmPasswordText = (EditText) findViewById(R.id.inputConfirmPassword);
+        Spinner LanguageSpin = (Spinner) findViewById(R.id.inputSpinnerLanguage);
+        Spinner ReligionSpin = (Spinner) findViewById(R.id.inputSpinnerReligion);
 
-
-                String Username = UsernameText.getText().toString();
-                String Password = PasswordText.getText().toString();
-                String ConfirmPassword = ConfirmPasswordText.getText().toString();
-                String Language = LanguageSpin.getSelectedItem().toString();
-                String Religion = ReligionSpin.getSelectedItem().toString();
+        String Username = UsernameText.getText().toString();
+        String Password = PasswordText.getText().toString();
+        String ConfirmPassword = ConfirmPasswordText.getText().toString();
+        String Language = LanguageSpin.getSelectedItem().toString();
+        String Religion = ReligionSpin.getSelectedItem().toString();
 
 
-                blnValidInput = ValidateFields(Username,Password,ConfirmPassword,Language,Religion);
-                if(blnValidInput == true){
-                    if(!Password.equals(ConfirmPassword)){
-                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
-                        PasswordText.setText(null);
-                        ConfirmPasswordText.setText(null);
-                    }
-                    else{
-                        addClient(Username,Password,Language,Religion);
-                    }
-
-                }
+        blnValidInput = ValidateFields(Username,Password,ConfirmPassword,Language,Religion);
+        if(blnValidInput == true){
+            if(!Password.equals(ConfirmPassword)){
+                Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                PasswordText.setText(null);
+                ConfirmPasswordText.setText(null);
             }
-        });
+            else{
+                addClient(Username,Password,Language,Religion);
+            }
+        }
     }
 
     public boolean ValidateFields(String username, String password, String confirmpassword,String language, String religion)
     {
-
         if(username.equals("")){
             Toast.makeText(getApplicationContext(), "Please enter in your Username", Toast.LENGTH_LONG).show();
             return false;
