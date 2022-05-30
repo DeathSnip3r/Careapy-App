@@ -7,7 +7,11 @@
     android:clipToPadding="false"
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
-    android:scrollbars="none"
+    android:scrollbars="vertical"
+    android:scrollbarFadeDuration="0"
+    android:scrollbarStyle="outsideOverlay"
+    android:scrollbarSize="@dimen/_3sdp"
+    android:scrollbarThumbVertical="@android:color/holo_green_dark"
     tools:context=".activities.CounsellorProblemsActivity">
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,8 +7,12 @@
     android:clipToPadding="false"
     android:onClick="CounProblemPage"
     android:overScrollMode="never"
+    android:scrollbars="vertical"
+    android:scrollbarFadeDuration="0"
+    android:scrollbarStyle="outsideOverlay"
+    android:scrollbarSize="@dimen/_3sdp"
+    android:scrollbarThumbVertical="@android:color/holo_green_dark"
     android:padding="@dimen/_24sdp"
-    android:scrollbars="none"
     tools:context=".activities.RegisterActivityCounsellor">
 
     <LinearLayout
