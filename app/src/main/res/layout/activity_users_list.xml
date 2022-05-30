@@ -33,6 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/imageBack"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -68,6 +69,9 @@
             android:visibility="gone"
             />
 
+
     </FrameLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,6 +66,7 @@ public class SignInActivity extends AppCompatActivity {
                                 startActivity(newAcc);
                                 newAcc.putExtra("Current_ID", Current_ID);
                                 newAcc.putExtra("User_ID", User_ID);
+                                newAcc.putExtra("Type","Client");
                                 // Start the new activity.
                                 startActivity(newAcc);
                             }
@@ -113,6 +114,7 @@ public class SignInActivity extends AppCompatActivity {
                             startActivity(newAcc);
                             newAcc.putExtra("Current_ID", Current_ID);
                             newAcc.putExtra("User_ID", User_ID);
+                            newAcc.putExtra("Type","Counsellor");
                             // Start the new activity.
                             startActivity(newAcc);
                         }
