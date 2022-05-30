@@ -149,9 +149,9 @@ public class clientProblems extends AppCompatActivity {
 
                 }
             }
-        });
 
-    }
+
+
     public void addproblem(String Problem){
         OkHttpClient client = new OkHttpClient();
 
