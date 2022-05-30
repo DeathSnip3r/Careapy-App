@@ -18,15 +18,9 @@ public class clientProblems extends AppCompatActivity {
         Intent regAcc = getIntent();
     }
     public void FinishRegClient(View v){
-        Button problem= (Button) findViewById(R.id.btnRegClientProblems);
-        problem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create the intent which will start your new activity.
-                Intent problemClient = new Intent(clientProblems.this, ChatActivity.class);
-                // Start the new activity.
-                startActivity(problemClient);
-            }
-        });
+        // Create the intent which will start your new activity.
+        Intent problemClient = new Intent(clientProblems.this, ChatActivity.class);
+        // Start the new activity.
+        startActivity(problemClient);
     }
 }
