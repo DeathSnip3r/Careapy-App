@@ -92,6 +92,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
     }
 
     public void CounProblemPage(View v){
+
         boolean blnValidInput = true;
 
         EditText NameText = (EditText) findViewById(R.id.inputFirstNames);
@@ -173,7 +174,8 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                               String language, String religion, String gender, String age)
     {
         OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/counsellor_problems.php?").newBuilder();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/counsellor_signup.php?").newBuilder();
         urlBuilder.addQueryParameter("Counsellor_Email", email);
         urlBuilder.addQueryParameter("Counsellor_Password", password);
         urlBuilder.addQueryParameter("First_Names", name);
@@ -200,7 +202,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                 RegisterActivityCounsellor.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        // !!!!!!!!!!!!!UPDATE PHP!!!!!!!!!!!! for new text
+                        
                         if (myResponse.equals("Email already logged on system")){
                             Toast.makeText(getApplicationContext(), myResponse, Toast.LENGTH_LONG).show();
                         }

@@ -22,17 +22,18 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class CounsellorProblemsActivity extends AppCompatActivity {
-
-    String Counsellor_ID ="4";
+    String Counsellor_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counsellor_problems);
         Intent regAcc = getIntent();
+        Counsellor_ID = regAcc.getStringExtra("Counsellor_ID");
 
     }
     public void FinishRegCoun(View v){
+
         String problem;
         int Count=0;
         CheckBox ADD = (CheckBox) findViewById(R.id.cbxAddiction);
@@ -140,7 +141,9 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
             Intent RegCoun = new Intent(CounsellorProblemsActivity.this, ChatActivity.class);
             // Start the new activity.
             startActivity(RegCoun);
-        }
+        }     
+
+
     }
 
     public void addproblem(String Problem){
