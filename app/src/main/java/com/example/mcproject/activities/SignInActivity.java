@@ -60,7 +60,13 @@ public class SignInActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                             }
                             else{
+                                String Current_ID = myResponse.split(",")[0];
+                                String User_ID= myResponse.split(",")[1];
                                 Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
+                                startActivity(newAcc);
+                                newAcc.putExtra("Current_ID", Current_ID);
+                                newAcc.putExtra("User_ID", User_ID);
+                                // Start the new activity.
                                 startActivity(newAcc);
                             }
                         }
@@ -101,7 +107,13 @@ public class SignInActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                         }
                         else{
+                            String Current_ID = myResponse.split(",")[0];
+                            String User_ID= myResponse.split(",")[1];
                             Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
+                            startActivity(newAcc);
+                            newAcc.putExtra("Current_ID", Current_ID);
+                            newAcc.putExtra("User_ID", User_ID);
+                            // Start the new activity.
                             startActivity(newAcc);
                         }
                     }
