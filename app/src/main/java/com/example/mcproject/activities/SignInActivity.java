@@ -62,7 +62,7 @@ public class SignInActivity extends AppCompatActivity {
                             else{
                                 String Current_ID = myResponse.split(",")[0];
                                 String User_ID= myResponse.split(",")[1];
-                                Intent newAcc = new Intent(SignInActivity.this, UsersListActivity.class);
+                                Intent newAcc = new Intent(SignInActivity.this, ChatActivity.class);
                                 startActivity(newAcc);
                                 newAcc.putExtra("Current_ID", Current_ID);
                                 newAcc.putExtra("User_ID", User_ID);
