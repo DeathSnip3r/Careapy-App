@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.SyncStateContract;
 import android.widget.TextView;
 
 import com.example.mcproject.R;
@@ -27,7 +28,8 @@ import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private PreferenceManager preferenceManager;
+    private ActivityChatScreenBinding binding;
+    private Users recipientUser;
 
     String Chat_ID="3";
     String Current_ID;
@@ -36,13 +38,14 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_screen);
+        binding = ActivityChatScreenBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Intent chat = getIntent();
-
         //Chat_ID = regAcc.getStringExtra("Chat_ID");
-        Current_ID = chat.getStringExtra("Current_ID");
+        //Current_ID = chat.getStringExtra("Current_ID");
         User_ID = chat.getStringExtra("User_ID ");
-
+        setListener();
+        loadRecipientData();
 
        //LOAD MESSAGES
         OkHttpClient client = new OkHttpClient();
@@ -109,5 +112,12 @@ public class ChatActivity extends AppCompatActivity {
 
         private void init(){
 
+        }
+        private void loadRecipientData(){
+            recipientUser = (Users) getIntent().getSerializableExtra(User_ID);
+            binding.textUsername.setText(recipientUser.name);
+        }
+        private void setListener(){
+            binding.imageBack.setOnClickListener(view -> onBackPressed());
         }
     }
