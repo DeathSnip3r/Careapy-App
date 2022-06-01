@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcproject.R;
+import com.example.mcproject.activities.adapters.ChatAdapter;
+import com.example.mcproject.activities.adapters.UserAdapter;
 import com.example.mcproject.databinding.ActivityChatScreenBinding;
 
 import org.json.JSONArray;
@@ -20,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Call;
@@ -33,8 +38,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatScreenBinding binding;
     private Users recipientUser;
+    private List<ChatMessages> chatMessages;
+    private ChatAdapter chatAdapter;
 
-    String Chat_ID="3";
+    String Chat_ID="1";
     String User_ID;
     String LastMessageID;
 
@@ -46,10 +53,10 @@ public class ChatActivity extends AppCompatActivity {
         Intent chat = getIntent();
         //Chat_ID = regAcc.getStringExtra("Chat_ID");
         //Current_ID = chat.getStringExtra("Current_ID");
-
         User_ID = chat.getStringExtra("User_ID ");
         setListener();
         loadRecipientData();
+
 
        //LOAD MESSAGES
         OkHttpClient client = new OkHttpClient();
@@ -71,51 +78,19 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                    if (response.isSuccessful()){
-                       try {
-                       JSONArray myResponse = new JSONArray(response.body().string());
-
-                        StringBuilder result = new StringBuilder();
-                            for (int i = 0; i < myResponse.length(); i++) {
-                                // Create a json object from the array
-                                JSONObject jsonObject = myResponse.getJSONObject(i);
-                                // Get the values from the json object
-                                String Sender_ID = jsonObject.getString("Sender_ID");
-
-                                String Message_Text = jsonObject.getString("Message_Text");
-
-                                String DateTimeSent = jsonObject.getString("DateTimeSent");
-
-                                // populate array here
-                                if (Sender_ID.equals(User_ID)){
-                                    //call container sent
-                                    //container.text = Message_Text
-                                    //container.datetime= DateTimeSent
-                                }else{
-                                    //call container sent
-                                    //container.text = Message_Text
-                                    //container.datetime= DateTimeSent
-                                }
-
-                                // Create a string to store the output
-                                String outputLine = Sender_ID + ", " + Message_Text + ", " + DateTimeSent;
-                                // Add the output line to the output string
-                                result.append(outputLine).append("/n");
-
-                                if (i==myResponse.length()-1){
-                                    LastMessageID=jsonObject.getString("Message_ID");
-                                }
-                            }
+                       String myResponse = response.body().string();
                             ChatActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //run for loop and load all messages here
-                                    EditText t = (EditText) findViewById(R.id.inputMessage);
-                                    t.setText(LastMessageID);
+                                    try {
+                                        messageBox(myResponse);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
-                        }catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
                 }
             }
             });
@@ -197,17 +172,53 @@ public class ChatActivity extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+    }
+
+        private  void  messageBox(String json) throws  JSONException{
+
+            JSONArray jsonArray = new JSONArray(json);
+            List<ChatMessages> Messages = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                // Create a json object from the array
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                // Get the values from the json object
+                String Sender_ID = jsonObject.getString("Sender_ID");
+
+                String Message_Text = jsonObject.getString("Message_Text");
+
+                String DateTimeSent = jsonObject.getString("DateTimeSent");
+
+                // populate array here
+                ChatMessages msg = new ChatMessages();
+                msg.Message = Message_Text;
+                msg.Sender_ID = Sender_ID;
+                msg.DateSent = DateTimeSent;
+                Messages.add(msg);
+
+                if (i == jsonArray.length()-1){
+                    LastMessageID=jsonObject.getString("Message_ID");
+                }
+            }
+           /* chatMessages = new ArrayList<>();
+            chatAdapter = new ChatAdapter(
+                    chatMessages,
+                    User_ID
+            );
+            binding.chatRecyclerView.setAdapter(chatAdapter);*/
+            if (Messages.size()>0){
+                ChatAdapter ChatAdapter = new ChatAdapter(Messages,User_ID);
+                binding.chatRecyclerView.setAdapter(ChatAdapter);
+                binding.chatRecyclerView.setVisibility(View.VISIBLE);
+            }
         }
-
-
-
-        private void init(){
+        private void sendMessage(){
 
         }
         private void loadRecipientData(){
             recipientUser = (Users) getIntent().getSerializableExtra(User_ID);
             binding.textUsername.setText(recipientUser.name);
         }
+
         private void setListener(){
             binding.imageBack.setOnClickListener(view -> onBackPressed());
         }

@@ -44,10 +44,11 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
 
         Intent users = getIntent();
         Current_ID = users.getStringExtra("Current_ID");
-        User_ID = users.getStringExtra("User_ID ");
+        User_ID = users.getStringExtra("User_ID");
         Type = users.getStringExtra("Type");
-        chatListener(User_ID);
-        if (Type.equals("Counsellor")) {
+        chatListener();
+        String check_type = "Counsellor";
+        if (Type.equals(check_type)) {
 
             OkHttpClient client = new OkHttpClient();
 
@@ -192,8 +193,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             binding.progressBar.setVisibility(View.INVISIBLE);
         }
     }
-    private void chatListener(String User_ID){
-
+    private void chatListener(){
         binding.imageBack.setOnClickListener(v -> onBackPressed());
     }
 
