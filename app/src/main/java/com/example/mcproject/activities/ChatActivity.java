@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mcproject.R;
 import com.example.mcproject.databinding.ActivityChatScreenBinding;
@@ -32,8 +35,8 @@ public class ChatActivity extends AppCompatActivity {
     private Users recipientUser;
 
     String Chat_ID="3";
-    String Current_ID;
     String User_ID;
+    String LastMessageID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         Intent chat = getIntent();
         //Chat_ID = regAcc.getStringExtra("Chat_ID");
         //Current_ID = chat.getStringExtra("Current_ID");
+
         User_ID = chat.getStringExtra("User_ID ");
         setListener();
         loadRecipientData();
@@ -81,6 +85,7 @@ public class ChatActivity extends AppCompatActivity {
 
                                 String DateTimeSent = jsonObject.getString("DateTimeSent");
 
+                                // populate array here
                                 if (Sender_ID.equals(User_ID)){
                                     //call container sent
                                     //container.text = Message_Text
@@ -95,11 +100,17 @@ public class ChatActivity extends AppCompatActivity {
                                 String outputLine = Sender_ID + ", " + Message_Text + ", " + DateTimeSent;
                                 // Add the output line to the output string
                                 result.append(outputLine).append("/n");
+
+                                if (i==myResponse.length()-1){
+                                    LastMessageID=jsonObject.getString("Message_ID");
+                                }
                             }
                             ChatActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-
+                                    //run for loop and load all messages here
+                                    EditText t = (EditText) findViewById(R.id.inputMessage);
+                                    t.setText(LastMessageID);
                                 }
                             });
                         }catch (JSONException e) {
@@ -108,7 +119,87 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
             });
+
+        final Handler handler = new Handler();
+        final int delay = 2000; // 1000 milliseconds == 1 second
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                OkHttpClient client = new OkHttpClient();
+
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/real_time.php?").newBuilder();
+                urlBuilder.addQueryParameter("Last_Message_ID", LastMessageID);
+                urlBuilder.addQueryParameter("Chat_ID", Chat_ID);
+                String url = urlBuilder.build().toString();
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        if (response.isSuccessful()){
+                            try {
+                                JSONArray myResponse = new JSONArray(response.body().string());
+
+                                StringBuilder result = new StringBuilder();
+                                for (int i = 0; i < myResponse.length(); i++) {
+                                    // Create a json object from the array
+                                    JSONObject jsonObject = myResponse.getJSONObject(i);
+                                    // Get the values from the json object
+                                    String Sender_ID = jsonObject.getString("Sender_ID");
+
+                                    String Message_Text = jsonObject.getString("Message_Text");
+
+                                    String DateTimeSent = jsonObject.getString("DateTimeSent");
+
+                                    if (Sender_ID.equals(User_ID)){
+                                        //call container sent
+                                        //container.text = Message_Text
+                                        //container.datetime= DateTimeSent
+                                    }else{
+                                        //call container sent
+                                        //container.text = Message_Text
+                                        //container.datetime= DateTimeSent
+                                    }
+
+                                    // Create a string to store the output
+                                    String outputLine = Sender_ID + ", " + Message_Text + ", " + DateTimeSent;
+                                    // Add the output line to the output string
+                                    result.append(outputLine).append("/n");
+
+                                    if (i==myResponse.length()-1){
+                                        LastMessageID=jsonObject.getString("Message_ID");
+                                    }
+                                }
+                                ChatActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // where you would add the container message
+                                        EditText t = (EditText) findViewById(R.id.inputMessage);
+                                        t.setText(LastMessageID);
+                                    }
+                                });
+                            }catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
         }
+
+
 
         private void init(){
 
