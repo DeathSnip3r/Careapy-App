@@ -25,6 +25,8 @@
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/fragment_f2_client.xml" value="0.2708333333333333" />
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/fragment_f3_client.xml" value="0.2708333333333333" />
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/fragment_register_activity_client.xml" value="0.3129528985507246" />
+        <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/item_container_received_message.xml" value="0.10740740740740741" />
+        <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/item_container_sent_message.xml" value="0.1453900709219858" />
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/item_container_user.xml" value="0.2980072463768116" />
       </map>
     </option>
