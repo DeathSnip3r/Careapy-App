@@ -23,10 +23,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.util.Random;
+
 public class RegisterActivityClient extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    String[] languages = {"English","Afrikaans","Xhosa","Zulu","Tswana","Ndebele","Tsonga","Swati"};
-    String[] Religion = {"Christian", "Islam", "Hinduism", "Judaism","Buddhism","None"};
+    String[] languages = {"","English","Afrikaans","Xhosa","Zulu","Tswana","Ndebele","Tsonga","Swati"};
+    String[] Religion = {"","Christian", "Islam", "Hinduism", "Judaism","Buddhism","None"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +97,18 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
                 ConfirmPasswordText.setText(null);
             }
             else{
-                addClient(Username,Password,Language,Religion);
+                String Safetypin = random();
+                addClient(Username,Password,Language,Religion,Safetypin);
             }
         }
     }
+
+    private String random(){
+            Random rand = new Random(); //instance of random class
+            String randomNumber = String.format("%04d", (Object) Integer.valueOf(rand.nextInt(1001)));
+            return randomNumber;
+        }
+
 
     public boolean ValidateFields(String username, String password, String confirmpassword,String language, String religion)
     {
@@ -126,13 +136,13 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
 
     }
 
-    public void addClient(String username, String password, String language, String religion)
+    public void addClient(String username, String password, String language, String religion,String SafetyPin)
     {
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/client_signup.php?").newBuilder();
         urlBuilder.addQueryParameter("Client_Username", username);
         urlBuilder.addQueryParameter("Client_Password", password);
-        urlBuilder.addQueryParameter("Client_Safety_Pin", ""/*discuss how we allocate it*/);
+        urlBuilder.addQueryParameter("Client_Safety_Pin", SafetyPin);
         urlBuilder.addQueryParameter("Languages", language);
         String url = urlBuilder.build().toString();
 
