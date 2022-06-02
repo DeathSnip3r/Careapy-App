@@ -47,8 +47,8 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         User_ID = users.getStringExtra("User_ID");
         Type = users.getStringExtra("Type");
         chatListener();
-        String check_type = "Counsellor";
-        if (Type.equals(check_type)) {
+
+        if (Type.equals("Counsellor")) {
 
             OkHttpClient client = new OkHttpClient();
 
@@ -136,6 +136,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             Clients.name = Client_username;
             Clients.RecentMsg = Last_Message;
             Clients.Chat_ID = Chat_ID;
+            Clients.userId = User_ID;
             users.add(Clients);
         }
         loading(false);
@@ -156,8 +157,6 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         //This is an array with only one element
         JSONArray jsonArray = new JSONArray(json);
         //extract each json object in the json array
-        String all_counsellor_details;
-
         JSONObject jsonObject = jsonArray.getJSONObject(0);
         String Counsellor_name = jsonObject.getString("Counsellor_name");
         String Chat_ID = jsonObject.getString("Chat_ID");
@@ -170,6 +169,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         Counsellor.name = Counsellor_name;
         Counsellor.RecentMsg = Last_Message;
         Counsellor.Chat_ID = Chat_ID;
+        Counsellor.userId = User_ID;
         users.add(Counsellor);
         if (users.size()>0){
             UserAdapter userAdapter = new UserAdapter(users, this);
@@ -199,8 +199,8 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
 
     @Override
     public void onClickUsers(Users users) {
-        Intent chat = new Intent(UsersListActivity.this, ChatActivity.class);
-        chat.putExtra("User_ID", users);
+        Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
+        chat.putExtra("User_ID",users);
         startActivity(chat);
         finish();
     }
