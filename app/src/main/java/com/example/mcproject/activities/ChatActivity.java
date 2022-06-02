@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
 import android.view.View;
@@ -23,9 +24,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.PrivateKey;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -41,8 +47,8 @@ public class ChatActivity extends AppCompatActivity {
     private List<ChatMessages> chatMessages;
     private ChatAdapter chatAdapter;
 
-    String Chat_ID="1";
-    String User_ID;
+    String Chat_ID = "1";
+    String User_ID = "21";
     String LastMessageID;
 
     @Override
@@ -54,47 +60,12 @@ public class ChatActivity extends AppCompatActivity {
         //Chat_ID = regAcc.getStringExtra("Chat_ID");
         //Current_ID = chat.getStringExtra("Current_ID");
         User_ID = chat.getStringExtra("User_ID ");
+        LoadMessages();
         setListener();
         loadRecipientData();
+        init();
 
-
-       //LOAD MESSAGES
-        OkHttpClient client = new OkHttpClient();
-
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_messages.php?").newBuilder();
-        urlBuilder.addQueryParameter("Chat_ID", Chat_ID);
-        String url = urlBuilder.build().toString();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                   if (response.isSuccessful()){
-                       String myResponse = response.body().string();
-                            ChatActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //run for loop and load all messages here
-                                    try {
-                                        messageBox(myResponse);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-
-                }
-            }
-            });
-
+        //Realtime Chat
         final Handler handler = new Handler();
         final int delay = 2000; // 1000 milliseconds == 1 second
 
@@ -123,8 +94,7 @@ public class ChatActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             try {
                                 JSONArray myResponse = new JSONArray(response.body().string());
-
-                                StringBuilder result = new StringBuilder();
+                                List<ChatMessages> Messages = new ArrayList<>();
                                 for (int i = 0; i < myResponse.length(); i++) {
                                     // Create a json object from the array
                                     JSONObject jsonObject = myResponse.getJSONObject(i);
@@ -134,21 +104,27 @@ public class ChatActivity extends AppCompatActivity {
                                     String Message_Text = jsonObject.getString("Message_Text");
 
                                     String DateTimeSent = jsonObject.getString("DateTimeSent");
+                                    ChatMessages msg = new ChatMessages();
+                                    msg.Message = Message_Text;
+                                    msg.Sender_ID = Sender_ID;
+                                    msg.DateSent = DateTimeSent;
+                                    Messages.add(msg);
 
                                     if (Sender_ID.equals(User_ID)){
+                                        ChatAdapter ChatAdapter = new ChatAdapter(Messages, msg.Sender_ID);
+                                        binding.chatRecyclerView.setAdapter(ChatAdapter);
+                                        binding.chatRecyclerView.setVisibility(View.VISIBLE);
                                         //call container sent
                                         //container.text = Message_Text
                                         //container.datetime= DateTimeSent
                                     }else{
+                                        ChatAdapter ChatAdapter = new ChatAdapter(Messages, msg.Sender_ID);
+                                        binding.chatRecyclerView.setAdapter(ChatAdapter);
+                                        binding.chatRecyclerView.setVisibility(View.VISIBLE);
                                         //call container sent
                                         //container.text = Message_Text
                                         //container.datetime= DateTimeSent
                                     }
-
-                                    // Create a string to store the output
-                                    String outputLine = Sender_ID + ", " + Message_Text + ", " + DateTimeSent;
-                                    // Add the output line to the output string
-                                    result.append(outputLine).append("/n");
 
                                     if (i==myResponse.length()-1){
                                         LastMessageID=jsonObject.getString("Message_ID");
@@ -174,6 +150,43 @@ public class ChatActivity extends AppCompatActivity {
         }, delay);
     }
 
+    public void LoadMessages() {
+        OkHttpClient client = new OkHttpClient();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_messages.php?").newBuilder();
+        urlBuilder.addQueryParameter("Chat_ID", Chat_ID);
+        String url = urlBuilder.build().toString();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String myResponse = response.body().string();
+                    ChatActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //run for loop and load all messages here
+                            try {
+                                messageBox(myResponse);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
         private  void  messageBox(String json) throws  JSONException{
 
             JSONArray jsonArray = new JSONArray(json);
@@ -183,9 +196,7 @@ public class ChatActivity extends AppCompatActivity {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 // Get the values from the json object
                 String Sender_ID = jsonObject.getString("Sender_ID");
-
                 String Message_Text = jsonObject.getString("Message_Text");
-
                 String DateTimeSent = jsonObject.getString("DateTimeSent");
 
                 // populate array here
@@ -199,21 +210,41 @@ public class ChatActivity extends AppCompatActivity {
                     LastMessageID=jsonObject.getString("Message_ID");
                 }
             }
-           /* chatMessages = new ArrayList<>();
+            /*chatMessages = new ArrayList<>();
             chatAdapter = new ChatAdapter(
                     chatMessages,
                     User_ID
             );
             binding.chatRecyclerView.setAdapter(chatAdapter);*/
             if (Messages.size()>0){
-                ChatAdapter ChatAdapter = new ChatAdapter(Messages,User_ID);
+                ChatAdapter ChatAdapter = new ChatAdapter(Messages, recipientUser.userId);
                 binding.chatRecyclerView.setAdapter(ChatAdapter);
                 binding.chatRecyclerView.setVisibility(View.VISIBLE);
             }
         }
-        private void sendMessage(){
 
+
+        private void init(){
+            chatMessages = new ArrayList<>();
+            chatAdapter = new ChatAdapter(
+                    chatMessages,
+                    User_ID
+            );
+            binding.chatRecyclerView.setAdapter(chatAdapter);
+            //php script of relevant data
         }
+
+        private void sendMessage(){
+            /*HashMap<String , Object> message = new HashMap<>();
+            message.put(Sender_ID,User_ID);
+            message.put(Reciever_ID,recipientUser);
+            message.put(Message, binding.inputMessage.getText().toString());
+            message.put(DeteSent, new Date());
+            //chat.add(message);
+            binding.inputMessage.setText(null);*/
+        }
+
+
         private void loadRecipientData(){
             recipientUser = (Users) getIntent().getSerializableExtra(User_ID);
             binding.textUsername.setText(recipientUser.name);
@@ -221,5 +252,9 @@ public class ChatActivity extends AppCompatActivity {
 
         private void setListener(){
             binding.imageBack.setOnClickListener(view -> onBackPressed());
+            binding.layoutSend.setOnClickListener(view -> sendMessage());
+        }
+        private String getDateTime(Date date){
+            return new SimpleDateFormat("MMMM dd, yyyy - hh:mm:ss", Locale.getDefault()).format(date);
         }
     }
