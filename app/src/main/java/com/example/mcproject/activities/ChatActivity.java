@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import com.example.mcproject.R;
@@ -51,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
         LoadMessages();
 
         //Realtime Chat
-        /*final Handler handler = new Handler();
+        final Handler handler = new Handler();
         final int delay = 2000; // 1000 milliseconds == 1 second
 
         handler.postDelayed(new Runnable() {
@@ -59,8 +60,8 @@ public class ChatActivity extends AppCompatActivity {
 
                 OkHttpClient client = new OkHttpClient();
 
-                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/real_time.php?").newBuilder();
-                urlBuilder.addQueryParameter("Last_Message_ID", LastMessageID);
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_messages.php?").newBuilder();
+                //urlBuilder.addQueryParameter("Last_Message_ID", LastMessageID);
                 urlBuilder.addQueryParameter("Chat_ID", Chat_ID);
                 String url = urlBuilder.build().toString();
 
@@ -77,9 +78,9 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         if (response.isSuccessful()){
-                            try {
-                                JSONArray myResponse = new JSONArray(response.body().string());
-                                List<ChatMessages> Messages = new ArrayList<>();
+                            //try {
+                                String myResponse = response.body().string();
+                                /*List<ChatMessages> Messages = new ArrayList<>();
                                 for (int i = 0; i < myResponse.length(); i++) {
                                     // Create a json object from the array
                                     JSONObject jsonObject = myResponse.getJSONObject(i);
@@ -95,44 +96,32 @@ public class ChatActivity extends AppCompatActivity {
                                     msg.DateSent = DateTimeSent;
                                     Messages.add(msg);
 
-                                    if (Sender_ID.equals(User_ID)){
-                                        ChatAdapter ChatAdapter = new ChatAdapter(Messages, msg.Sender_ID);
-                                        binding.chatRecyclerView.setAdapter(ChatAdapter);
-                                        binding.chatRecyclerView.setVisibility(View.VISIBLE);
-                                        //call container sent
-                                        //container.text = Message_Text
-                                        //container.datetime= DateTimeSent
-                                    }else{
-                                        ChatAdapter ChatAdapter = new ChatAdapter(Messages, msg.Sender_ID);
-                                        binding.chatRecyclerView.setAdapter(ChatAdapter);
-                                        binding.chatRecyclerView.setVisibility(View.VISIBLE);
-                                        //call container sent
-                                        //container.text = Message_Text
-                                        //container.datetime= DateTimeSent
-                                    }
 
                                     if (i==myResponse.length()-1){
                                         LastMessageID=jsonObject.getString("Message_ID");
                                     }
-                                }
+                                    ChatAdapter chatAdapter = new ChatAdapter(Messages, User_ID);
+                                    binding.chatRecyclerView.setAdapter(chatAdapter);
+                                    binding.chatRecyclerView.setVisibility(View.VISIBLE);
+                                }*/
                                 ChatActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        // where you would add the container message
-                                        EditText t = (EditText) findViewById(R.id.inputMessage);
-                                        t.setText(LastMessageID);
+                                        try {
+                                            messageBox(myResponse);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 });
-                            }catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                           // }
+
                         }
                     }
                 });
-
                 handler.postDelayed(this, delay);
             }
-        }, delay);*/
+        }, delay);
     }
 
      public void LoadMessages() {
