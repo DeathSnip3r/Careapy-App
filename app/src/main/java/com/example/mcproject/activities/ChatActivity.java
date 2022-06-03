@@ -1,42 +1,24 @@
 package com.example.mcproject.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.preference.PreferenceManager;
-import android.provider.SyncStateContract;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.mcproject.R;
 import com.example.mcproject.activities.adapters.ChatAdapter;
 import com.example.mcproject.activities.adapters.UserAdapter;
 import com.example.mcproject.databinding.ActivityChatScreenBinding;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EventListener;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -210,8 +192,11 @@ public class ChatActivity extends AppCompatActivity {
 
                 if (i == jsonArray.length() - 1) {
                     LastMessageID = jsonObject.getString("Message_ID");
-
                 }
+                ChatAdapter chatAdapter = new ChatAdapter(Messages, User_ID);
+                binding.chatRecyclerView.setAdapter(chatAdapter);
+                binding.chatRecyclerView.setVisibility(View.VISIBLE);
+            }
                 if (count == 0) {
                     chatAdapter.notifyDataSetChanged();
                 } else {
@@ -219,7 +204,7 @@ public class ChatActivity extends AppCompatActivity {
                     binding.chatRecyclerView.smoothScrollToPosition(chatMessages.size() - 1);
                 }
                 binding.chatRecyclerView.setVisibility(View.VISIBLE);
-            }
+
             binding.progressBar.setVisibility(View.GONE);
         }
 
