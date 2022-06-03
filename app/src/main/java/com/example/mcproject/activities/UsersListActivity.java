@@ -135,8 +135,8 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             Users Clients = new Users();
             Clients.name = Client_username;
             Clients.RecentMsg = Last_Message;
-            Clients.Chat_ID = Chat_ID;
-            Clients.id = User_ID;
+            Clients.chatId = Chat_ID;
+            Clients.userId = User_ID;
             users.add(Clients);
         }
         loading(false);
@@ -168,8 +168,8 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         Users Counsellor = new Users();
         Counsellor.name = Counsellor_name;
         Counsellor.RecentMsg = Last_Message;
-        Counsellor.Chat_ID = Chat_ID;
-        Counsellor.id = User_ID;
+        Counsellor.chatId = Chat_ID;
+        Counsellor.userId = User_ID;
         users.add(Counsellor);
         if (users.size()>0){
             UserAdapter userAdapter = new UserAdapter(users, this);
@@ -200,8 +200,9 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
     @Override
     public void onClickUsers(Users users) {
         Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
+        chat.putExtra("User_ID", users.userId);
+        chat.putExtra("Chat_ID", users.chatId);
         chat.putExtra(Constants.KEY_USER, users);
         startActivity(chat);
-        finish();
     }
 }

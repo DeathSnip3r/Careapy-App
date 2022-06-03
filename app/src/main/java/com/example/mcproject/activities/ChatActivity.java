@@ -24,8 +24,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventListener;
@@ -46,24 +48,23 @@ public class ChatActivity extends AppCompatActivity {
     private Users recipientUser;
     private List<ChatMessages> chatMessages;
     private ChatAdapter chatAdapter;
-
-    String Chat_ID = "1";
-    String User_ID = "21";
-    //String LastMessageID;
+    String User_ID;
+    String Chat_ID;
+    String LastMessageID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        Intent intent = getIntent();
+        User_ID = intent.getStringExtra("User_ID");
+        Chat_ID = intent.getStringExtra("Chat_ID");
+        User_ID = User_ID.replaceAll("[\n\t ]", "");
         setListener();
         loadRecipientData();
         init();
-        //LoadMessages();
-
-
-
+        LoadMessages();
 
         //Realtime Chat
         /*final Handler handler = new Handler();
@@ -150,9 +151,8 @@ public class ChatActivity extends AppCompatActivity {
         }, delay);*/
     }
 
-   /* public void LoadMessages() {
+     public void LoadMessages() {
         OkHttpClient client = new OkHttpClient();
-
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_messages.php?").newBuilder();
         urlBuilder.addQueryParameter("Chat_ID", Chat_ID);
         String url = urlBuilder.build().toString();
@@ -186,9 +186,8 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
-    }*/
-       /* private  void  messageBox(String json) throws  JSONException{
-
+    }
+        private  void  messageBox(String json) throws  JSONException{
             JSONArray jsonArray = new JSONArray(json);
             List<ChatMessages> Messages = new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -207,7 +206,7 @@ public class ChatActivity extends AppCompatActivity {
                 Messages.add(msg);
 
                 if (i == jsonArray.length()-1){
-                    LastMessageID=jsonObject.getString("Message_ID");
+                    LastMessageID =jsonObject.getString("Message_ID");
                 }
             }
             chatMessages = new ArrayList<>();
@@ -221,7 +220,7 @@ public class ChatActivity extends AppCompatActivity {
                 binding.chatRecyclerView.setAdapter(ChatAdapter);
                 binding.chatRecyclerView.setVisibility(View.VISIBLE);
             }
-        }*/
+        }
 
 
         private void init(){
@@ -235,49 +234,47 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         private void sendMessage(){
-            //String DateSent = new Date();
-            String Message_Text = binding.inputMessage.getText().toString();
-            OkHttpClient client = new OkHttpClient();
 
-            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/insert_message.php?").newBuilder();
-            urlBuilder.addQueryParameter("Chat_ID",Chat_ID );
-            urlBuilder.addQueryParameter("Sender_ID", User_ID);
-            urlBuilder.addQueryParameter("Message_Text", Message_Text);
-            //urlBuilder.addQueryParameter("DateTimeSent", date);
-            String url = urlBuilder.build().toString();
+            EditText mMessage = findViewById(R.id.inputMessage);
+            String Message = mMessage.getText().toString();
+            String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
+            if(!mMessage.getText().toString().isEmpty()){
+                OkHttpClient client = new OkHttpClient();
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/insert_message.php?").newBuilder();
+                urlBuilder.addQueryParameter("Chat_ID",Chat_ID );
+                urlBuilder.addQueryParameter("Sender_ID", User_ID);
+                urlBuilder.addQueryParameter("Message_Text", Message);
+                urlBuilder.addQueryParameter("DateTimeSent", date);
+                String url = urlBuilder.build().toString();
 
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    e.printStackTrace();
-                }
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
 
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String myResponse = response.body().string();
-                        ChatActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //run for loop and load all messages here
-
-                            }
-                        });
-
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        e.printStackTrace();
                     }
-                }
-            });
-           /* HashMap<String , Object> message = new HashMap<>();
-            message.put(Sender_ID,User_ID);
-            message.put(Reciever_ID,recipientUser.id);
-            message.put(Message, binding.inputMessage.getText().toString());
-            message.put(DateSent, new Date());
-            chat.add(message);
-            binding.inputMessage.setText(null);*/
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String myResponse = response.body().string();
+                            ChatActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // should send message to database i think
+
+                                }
+                            });
+
+                        }
+                    }
+                });
+            }
+            binding.inputMessage.setText(null);
         }
 
 
@@ -290,7 +287,5 @@ public class ChatActivity extends AppCompatActivity {
             binding.imageBack.setOnClickListener(view -> onBackPressed());
             binding.layoutSend.setOnClickListener(view -> sendMessage());
         }
-       private String getDateTime(Date date){
-            return new SimpleDateFormat("MMMM dd, yyyy - hh:mm:ss", Locale.getDefault()).format(date);
-        }
+
     }
