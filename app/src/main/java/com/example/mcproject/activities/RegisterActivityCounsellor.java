@@ -123,7 +123,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                 ConfirmPasswordText.setText(null);
             }
             else{
-                addCounsellor(Email,Password,Name,Surname,Gender,Age, Religion,Language);
+                addCounsellor(Name,Surname,Email,Password,Language,Religion,Gender,Age);
             }
         }
     }

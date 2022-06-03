@@ -32,6 +32,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
         Counsellor_ID = regAcc.getStringExtra("Counsellor_ID");
 
     }
+
     public void FinishRegCoun(View v){
 
         String problem;
