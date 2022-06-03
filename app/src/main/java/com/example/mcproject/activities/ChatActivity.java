@@ -49,24 +49,24 @@ public class ChatActivity extends AppCompatActivity {
 
     String Chat_ID = "1";
     String User_ID = "21";
-    String LastMessageID;
+    //String LastMessageID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent chat = getIntent();
-        //Chat_ID = regAcc.getStringExtra("Chat_ID");
-        //Current_ID = chat.getStringExtra("Current_ID");
-        User_ID = chat.getStringExtra("User_ID ");
-        LoadMessages();
+
         setListener();
         loadRecipientData();
         init();
+        //LoadMessages();
+
+
+
 
         //Realtime Chat
-        final Handler handler = new Handler();
+        /*final Handler handler = new Handler();
         final int delay = 2000; // 1000 milliseconds == 1 second
 
         handler.postDelayed(new Runnable() {
@@ -147,10 +147,10 @@ public class ChatActivity extends AppCompatActivity {
 
                 handler.postDelayed(this, delay);
             }
-        }, delay);
+        }, delay);*/
     }
 
-    public void LoadMessages() {
+   /* public void LoadMessages() {
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_messages.php?").newBuilder();
@@ -186,8 +186,8 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-        private  void  messageBox(String json) throws  JSONException{
+    }*/
+       /* private  void  messageBox(String json) throws  JSONException{
 
             JSONArray jsonArray = new JSONArray(json);
             List<ChatMessages> Messages = new ArrayList<>();
@@ -210,51 +210,87 @@ public class ChatActivity extends AppCompatActivity {
                     LastMessageID=jsonObject.getString("Message_ID");
                 }
             }
-            /*chatMessages = new ArrayList<>();
-            chatAdapter = new ChatAdapter(
-                    chatMessages,
-                    User_ID
-            );
-            binding.chatRecyclerView.setAdapter(chatAdapter);*/
-            if (Messages.size()>0){
-                ChatAdapter ChatAdapter = new ChatAdapter(Messages, recipientUser.userId);
-                binding.chatRecyclerView.setAdapter(ChatAdapter);
-                binding.chatRecyclerView.setVisibility(View.VISIBLE);
-            }
-        }
-
-
-        private void init(){
             chatMessages = new ArrayList<>();
             chatAdapter = new ChatAdapter(
                     chatMessages,
                     User_ID
             );
             binding.chatRecyclerView.setAdapter(chatAdapter);
+            if (Messages.size()>0){
+                ChatAdapter ChatAdapter = new ChatAdapter(Messages, recipientUser.userId);
+                binding.chatRecyclerView.setAdapter(ChatAdapter);
+                binding.chatRecyclerView.setVisibility(View.VISIBLE);
+            }
+        }*/
+
+
+        private void init(){
+            chatMessages = new ArrayList<>();
+            chatAdapter = new ChatAdapter(
+                    chatMessages,
+                    User_ID //senderId
+            );
+            binding.chatRecyclerView.setAdapter(chatAdapter);
             //php script of relevant data
         }
 
         private void sendMessage(){
-            /*HashMap<String , Object> message = new HashMap<>();
+            //String DateSent = new Date();
+            String Message_Text = binding.inputMessage.getText().toString();
+            OkHttpClient client = new OkHttpClient();
+
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/insert_message.php?").newBuilder();
+            urlBuilder.addQueryParameter("Chat_ID",Chat_ID );
+            urlBuilder.addQueryParameter("Sender_ID", User_ID);
+            urlBuilder.addQueryParameter("Message_Text", Message_Text);
+            //urlBuilder.addQueryParameter("DateTimeSent", date);
+            String url = urlBuilder.build().toString();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        String myResponse = response.body().string();
+                        ChatActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //run for loop and load all messages here
+
+                            }
+                        });
+
+                    }
+                }
+            });
+           /* HashMap<String , Object> message = new HashMap<>();
             message.put(Sender_ID,User_ID);
-            message.put(Reciever_ID,recipientUser);
+            message.put(Reciever_ID,recipientUser.id);
             message.put(Message, binding.inputMessage.getText().toString());
-            message.put(DeteSent, new Date());
-            //chat.add(message);
+            message.put(DateSent, new Date());
+            chat.add(message);
             binding.inputMessage.setText(null);*/
         }
 
 
         private void loadRecipientData(){
-            recipientUser = (Users) getIntent().getSerializableExtra(User_ID);
+            recipientUser = (Users) getIntent().getSerializableExtra(Constants.KEY_USER);
             binding.textUsername.setText(recipientUser.name);
         }
 
-        private void setListener(){
+       private void setListener(){
             binding.imageBack.setOnClickListener(view -> onBackPressed());
             binding.layoutSend.setOnClickListener(view -> sendMessage());
         }
-        private String getDateTime(Date date){
+       private String getDateTime(Date date){
             return new SimpleDateFormat("MMMM dd, yyyy - hh:mm:ss", Locale.getDefault()).format(date);
         }
     }
