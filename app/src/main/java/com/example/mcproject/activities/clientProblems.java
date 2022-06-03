@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -137,16 +136,17 @@ public class clientProblems extends AppCompatActivity {
                     addproblem(problem);
                     ++Count;
                 }
+
                 if (Count==0) {
                     Toast.makeText(getApplicationContext(), "Please select at least one problem", Toast.LENGTH_LONG).show();
                 }
                 else{
-
-                    assignCounsellor();
-                    Intent RegCoun = new Intent(clientProblems.this, SignInActivity.class);
+                    Intent RegCoun1 = new Intent(clientProblems.this, WelcomeClient.class);
                     // Start the new activity.
-                    startActivity(RegCoun);
-
+                    RegCoun1 .putExtra("Client_ID", Client_ID);
+                    RegCoun1 .putExtra("Client_Religion_Selected", Religion);
+                    RegCoun1 .putExtra("Client_Language", Language);
+                    startActivity(RegCoun1);
                 }
             }
 
@@ -177,30 +177,5 @@ public class clientProblems extends AppCompatActivity {
         });
 
     }
-    public void assignCounsellor(){
-        OkHttpClient client = new OkHttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/match_algorithm.php?").newBuilder();
-        urlBuilder.addQueryParameter("Client_ID", Client_ID);
-        urlBuilder.addQueryParameter("Client_Language", Language);
-        urlBuilder.addQueryParameter("Client_Religion_Selected", Religion);
-        String url = urlBuilder.build().toString();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-
-            }
-        });
-
-    }
 }
