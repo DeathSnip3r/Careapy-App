@@ -46,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         User_ID = intent.getStringExtra("User_ID");
         Chat_ID = intent.getStringExtra("Chat_ID");
         User_ID = User_ID.replaceAll("[\n\t ]", "");
+        User_ID = User_ID.replaceAll("\"", "");
         setListener();
         loadRecipientData();
         init();
