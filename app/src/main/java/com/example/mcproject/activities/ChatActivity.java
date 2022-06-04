@@ -60,8 +60,8 @@ public class ChatActivity extends AppCompatActivity {
 
                 OkHttpClient client = new OkHttpClient();
 
-                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_messages.php?").newBuilder();
-                //urlBuilder.addQueryParameter("Last_Message_ID", LastMessageID);
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/real_time.php?").newBuilder();
+                urlBuilder.addQueryParameter("Last_Message_ID", LastMessageID);
                 urlBuilder.addQueryParameter("Chat_ID", Chat_ID);
                 String url = urlBuilder.build().toString();
 
@@ -107,10 +107,12 @@ public class ChatActivity extends AppCompatActivity {
                                 ChatActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        try {
-                                            messageBox(myResponse);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                        if (!myResponse.equals("none")) {
+                                            try {
+                                                messageBox(myResponse);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
                                     }
                                 });
