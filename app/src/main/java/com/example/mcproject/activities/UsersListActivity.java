@@ -46,6 +46,8 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
 
         Intent users = getIntent();
         Current_ID = users.getStringExtra("Current_ID");
+        Current_ID = Current_ID.replaceAll("[\n\t ]", "");
+        Current_ID = Current_ID.replaceAll("\"", "");
         User_ID = users.getStringExtra("User_ID");
         Type = users.getStringExtra("Type");
         chatListener();
@@ -89,7 +91,6 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             OkHttpClient client = new OkHttpClient();
 
             HttpUrl.Builder url_builder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/load_counsellor_chat.php?").newBuilder();
-            String Client_ID = "";
             url_builder.addQueryParameter("Client_ID",Current_ID);
             //need to send request variables/post parameters of datetime in this format from android
             String url = url_builder.build().toString();
@@ -120,7 +121,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             });
         }
 
-        final Handler handler = new Handler();
+       /* final Handler handler = new Handler();
         final int delay = 2000; // 1000 milliseconds == 1 second
 
         if (Type.equals("Counsellor")) {
@@ -218,6 +219,8 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
 
 
         }
+        */
+
     }
 
     public void processJSONCounsellor(String json) throws JSONException {
