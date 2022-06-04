@@ -121,7 +121,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             });
         }
 
-       /* final Handler handler = new Handler();
+        final Handler handler = new Handler();
         final int delay = 2000; // 1000 milliseconds == 1 second
 
         if (Type.equals("Counsellor")) {
@@ -219,7 +219,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
 
 
         }
-        */
+
 
     }
 
