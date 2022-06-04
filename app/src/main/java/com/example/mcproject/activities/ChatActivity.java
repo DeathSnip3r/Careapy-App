@@ -5,8 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
+
 import com.example.mcproject.R;
 import com.example.mcproject.activities.adapters.ChatAdapter;
 import com.example.mcproject.activities.adapters.UserAdapter;
@@ -36,17 +42,22 @@ public class ChatActivity extends AppCompatActivity {
     String User_ID;
     String Chat_ID;
     String LastMessageID;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         Intent intent = getIntent();
         User_ID = intent.getStringExtra("User_ID");
         Chat_ID = intent.getStringExtra("Chat_ID");
         User_ID = User_ID.replaceAll("[\n\t ]", "");
         User_ID = User_ID.replaceAll("\"", "");
+        name = intent.getStringExtra("name");
+
+
         setListener();
         loadRecipientData();
         init();
@@ -79,32 +90,9 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         if (response.isSuccessful()){
-                            //try {
+
                                 String myResponse = response.body().string();
-                                /*List<ChatMessages> Messages = new ArrayList<>();
-                                for (int i = 0; i < myResponse.length(); i++) {
-                                    // Create a json object from the array
-                                    JSONObject jsonObject = myResponse.getJSONObject(i);
-                                    // Get the values from the json object
-                                    String Sender_ID = jsonObject.getString("Sender_ID");
 
-                                    String Message_Text = jsonObject.getString("Message_Text");
-
-                                    String DateTimeSent = jsonObject.getString("DateTimeSent");
-                                    ChatMessages msg = new ChatMessages();
-                                    msg.Message = Message_Text;
-                                    msg.Sender_ID = Sender_ID;
-                                    msg.DateSent = DateTimeSent;
-                                    Messages.add(msg);
-
-
-                                    if (i==myResponse.length()-1){
-                                        LastMessageID=jsonObject.getString("Message_ID");
-                                    }
-                                    ChatAdapter chatAdapter = new ChatAdapter(Messages, User_ID);
-                                    binding.chatRecyclerView.setAdapter(chatAdapter);
-                                    binding.chatRecyclerView.setVisibility(View.VISIBLE);
-                                }*/
                                 ChatActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -117,8 +105,6 @@ public class ChatActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                           // }
-
                         }
                     }
                 });
@@ -180,6 +166,7 @@ public class ChatActivity extends AppCompatActivity {
                 msg.Sender_ID = Sender_ID;
                 msg.Message = Message_Text;
                 msg.DateSent = DateTimeSent;
+                msg.Name = name;
                 Messages.add(msg);
 
                 if (i == jsonArray.length() - 1) {
@@ -207,7 +194,6 @@ public class ChatActivity extends AppCompatActivity {
                     User_ID //senderId
             );
             binding.chatRecyclerView.setAdapter(chatAdapter);
-            //php script of relevant data
         }
 
         private void sendMessage(){
@@ -239,7 +225,7 @@ public class ChatActivity extends AppCompatActivity {
                             ChatActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    // should send message to database i think
+                                    // should send message to database
                                 }
                             });
                         }
@@ -249,15 +235,34 @@ public class ChatActivity extends AppCompatActivity {
             binding.inputMessage.setText(null);
         }
 
+        private void moreOptions(){
+            PopupMenu popupMenu = new PopupMenu(ChatActivity.this, binding.imageMoreOptions);
+            popupMenu.getMenuInflater().inflate(R.menu.more_options,popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()){
+                        case R.id.item_ClearChat:
+                            //php script to clear chat
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+            });
+            popupMenu.show();
+        }
 
         private void loadRecipientData(){
             recipientUser = (Users) getIntent().getSerializableExtra(Constants.KEY_USER);
             binding.textUsername.setText(recipientUser.name);
+
         }
 
        private void setListener(){
             binding.imageBack.setOnClickListener(view -> onBackPressed());
             binding.layoutSend.setOnClickListener(view -> sendMessage());
+            binding.imageMoreOptions.setOnClickListener(view -> moreOptions());
         }
 
     }

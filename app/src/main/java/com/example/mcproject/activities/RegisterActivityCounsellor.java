@@ -24,6 +24,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.util.Random;
+
 public class RegisterActivityCounsellor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String[] languages = {"","Afrikaans","English","Ndebele","Swati","Tsonga","Tswana","Xhosa","Zulu"};
@@ -86,6 +88,12 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
 
     }
 
+    private String random(){
+        Random rand = new Random(); //instance of random class
+        String randomNumber = String.format("%04d", (Object) Integer.valueOf(rand.nextInt(1001)));
+        return randomNumber;
+    }
+
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -123,7 +131,8 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                 ConfirmPasswordText.setText(null);
             }
             else{
-                addCounsellor(Name,Surname,Email,Password,Language,Religion,Gender,Age);
+                String Safetypin = random();
+                addCounsellor(Name,Surname,Email,Password,Language,Religion,Gender,Age,Safetypin);
             }
         }
     }
@@ -171,7 +180,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
     }
 
     public void addCounsellor(String name, String surname, String email, String password,
-                              String language, String religion, String gender, String age)
+                              String language, String religion, String gender, String age, String Safetypin)
     {
         OkHttpClient client = new OkHttpClient();
 
@@ -184,6 +193,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
         urlBuilder.addQueryParameter("Age", age);
         urlBuilder.addQueryParameter("Religion", religion);
         urlBuilder.addQueryParameter("Languages", language);
+        urlBuilder.addQueryParameter("Counsellor_Safety_Pin", Safetypin);
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
