@@ -49,6 +49,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         Current_ID = Current_ID.replaceAll("[\n\t ]", "");
         Current_ID = Current_ID.replaceAll("\"", "");
         User_ID = users.getStringExtra("User_ID");
+        User_ID = User_ID.replaceAll("\"", "");
         Type = users.getStringExtra("Type");
         chatListener();
 
@@ -121,7 +122,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             });
         }
 
-       /* final Handler handler = new Handler();
+       final Handler handler = new Handler();
         final int delay = 2000; // 1000 milliseconds == 1 second
 
         if (Type.equals("Counsellor")) {
@@ -219,7 +220,6 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
 
 
         }
-        */
 
     }
 
