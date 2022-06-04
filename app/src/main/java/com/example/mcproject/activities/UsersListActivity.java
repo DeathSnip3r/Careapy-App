@@ -50,8 +50,6 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         Current_ID = Current_ID.replaceAll("\"", "");
         User_ID = users.getStringExtra("User_ID");
         Type = users.getStringExtra("Type");
-        chatListener();
-
         if (Type.equals("Counsellor")) {
 
             OkHttpClient client = new OkHttpClient();
@@ -298,15 +296,14 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             binding.progressBar.setVisibility(View.INVISIBLE);
         }
     }
-    private void chatListener(){
-        binding.imageBack.setOnClickListener(v -> onBackPressed());
-    }
+
 
     @Override
     public void onClickUsers(Users users) {
         Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
         chat.putExtra("User_ID", users.userId);
         chat.putExtra("Chat_ID", users.chatId);
+        chat.putExtra("name",users.name);
         chat.putExtra(Constants.KEY_USER, users);
         startActivity(chat);
     }

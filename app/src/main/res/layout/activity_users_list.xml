@@ -8,39 +8,28 @@
     android:background="@color/primary"
     tools:context=".activities.UsersListActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageBack"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:background="@drawable/background_image"
-        android:padding="@dimen/_6sdp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:tint="@color/black"/>
-
     <TextView
+        android:id="@+id/Chats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chats"
-        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/chats"
         android:textColor="@color/white"
-        android:textSize="@dimen/_16sdp"
-        app:layout_constraintBottom_toBottomOf="@id/imageBack"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageBack"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_16sdp"
         android:background="@drawable/background_content_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageBack">
+        app:layout_constraintTop_toBottomOf="@id/Chats">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/usersRecyclerView"
@@ -51,14 +40,13 @@
             android:overScrollMode="never"
             android:padding="@dimen/_20sdp"
             android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/ErrorMessage"
@@ -70,8 +58,7 @@
             android:gravity="center"
             android:textColor="@color/error"
             android:textSize="@dimen/_12ssp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
 
     </FrameLayout>

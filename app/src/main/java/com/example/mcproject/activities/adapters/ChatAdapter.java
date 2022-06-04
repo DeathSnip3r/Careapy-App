@@ -1,5 +1,6 @@
 package com.example.mcproject.activities.adapters;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,7 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mcproject.activities.ChatActivity;
 import com.example.mcproject.activities.ChatMessages;
+import com.example.mcproject.activities.Constants;
+import com.example.mcproject.activities.Users;
+import com.example.mcproject.activities.UsersListActivity;
 import com.example.mcproject.databinding.ItemContainerReceivedMessageBinding;
 import com.example.mcproject.databinding.ItemContainerSentMessageBinding;
 
@@ -17,9 +22,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<ChatMessages> chatMessages;
     private final String senderID;
-
     private static final int View_Type_Sent = 1;
     private static final int View_Type_Received = 2;
+
 
     public ChatAdapter(List<ChatMessages> chatMessages, String senderID) {
         this.chatMessages = chatMessages;
@@ -100,6 +105,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         void setData(ChatMessages chatMessages){
             binding.textMessage.setText(chatMessages.Message);
             binding.dateTimeText.setText(chatMessages.DateSent);
+            binding.userTitle.setText(String.valueOf(chatMessages.Name.charAt(0)));
         }
+
     }
 }
