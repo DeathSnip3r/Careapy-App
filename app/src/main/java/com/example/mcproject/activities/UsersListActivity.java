@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
     String Current_ID;
     String User_ID;
     String Type;
+    ArrayList<String> Last_messages = new ArrayList<String>();
 
     private ActivityUsersListBinding binding;
 
@@ -117,6 +119,105 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
                 }
             });
         }
+
+        final Handler handler = new Handler();
+        final int delay = 2000; // 1000 milliseconds == 1 second
+
+        if (Type.equals("Counsellor")) {
+            handler.postDelayed(new Runnable() {
+                public void run() {
+
+                    OkHttpClient client = new OkHttpClient();
+
+                    HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/real_time_client_chats.php?").newBuilder();
+                    urlBuilder.addQueryParameter("Counsellor_ID", Current_ID);
+                    String url = urlBuilder.build().toString();
+
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                            if (response.isSuccessful()) {
+                                //try {
+                                String myResponse = response.body().string();
+                                UsersListActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (!myResponse.equals("none")) {
+                                            try {
+                                                processJSONCounsellor(myResponse);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                });
+                                // }
+
+                            }
+                        }
+                    });
+                    handler.postDelayed(this, delay);
+                }
+            }, delay);
+
+    }
+        else{
+            handler.postDelayed(new Runnable() {
+                public void run() {
+
+                    OkHttpClient client = new OkHttpClient();
+
+                    HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/real_time_counsellor_chat.php?").newBuilder();
+                    urlBuilder.addQueryParameter("Client_ID", Current_ID);
+                    String url = urlBuilder.build().toString();
+
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                            if (response.isSuccessful()) {
+                                //try {
+                                String myResponse = response.body().string();
+                                UsersListActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (!myResponse.equals("none")) {
+                                            try {
+                                                processJSONClient(myResponse);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                });
+                                // }
+
+                            }
+                        }
+                    });
+                    handler.postDelayed(this, delay);
+                }
+            }, delay);
+
+
+        }
     }
 
     public void processJSONCounsellor(String json) throws JSONException {
@@ -138,6 +239,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             Clients.chatId = Chat_ID;
             Clients.userId = User_ID;
             users.add(Clients);
+
         }
         loading(false);
         if (users.size()>0){
