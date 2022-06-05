@@ -58,4 +58,7 @@
     <string name="trauma_and_abuse">Trauma and abuse</string>
     <string name="select_the_problems_you_specialise_in">Select the problems you specialise in</string>
     <string name="message">Message</string>
+    <string name="Backup_Pin">Backup Pin</string>
+    <string name="New_Password">New Password</string>
+    <string name="Confirm_New_Password">Confirm New Password</string>
 </resources>

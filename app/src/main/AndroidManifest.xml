@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mcproject">
         <activity
+            android:name=".activities.WelcomeCounsellor"
+            android:exported="false" />
+        <activity
             android:name=".activities.change_Password"
             android:exported="false" />
         <activity
