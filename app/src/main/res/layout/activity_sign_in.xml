@@ -91,7 +91,8 @@
             android:text="@string/forgot_password"
             android:textColor="@color/Blue"
             android:textSize="@dimen/_12ssp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="ForgotPassword"/>
 
         <TextView
             android:layout_width="match_parent"

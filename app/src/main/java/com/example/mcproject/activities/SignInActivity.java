@@ -30,6 +30,23 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
     }
 
+    public void Login(View v) {
+        String Username;
+        String Password;
+
+        EditText UsernameText = (EditText)findViewById(R.id.inputUsername);
+        EditText PasswordText = (EditText)findViewById(R.id.inputPassword);
+        Username= UsernameText.getText().toString();
+        Password= PasswordText.getText().toString();
+
+        if (Username.indexOf('@')>=0){
+            CounsellorLogin(Username,Password);
+        }
+        else{
+            ClientLogin(Username, Password);
+        }
+    }
+
     public void ClientLogin(String Username, String Password){
 
         OkHttpClient client = new OkHttpClient();
@@ -104,7 +121,7 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        if (myResponse.equals("failure\n")){
+                        if (myResponse.equals("failure")){
                             Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_LONG).show();
                         }
                         else{
@@ -125,26 +142,18 @@ public class SignInActivity extends AppCompatActivity {
         });
 
     }
-    public void Login(View v) {
-        String Username;
-        String Password;
 
-        EditText UsernameText = (EditText)findViewById(R.id.inputUsername);
-        EditText PasswordText = (EditText)findViewById(R.id.inputPassword);
-        Username= UsernameText.getText().toString();
-        Password= PasswordText.getText().toString();
-
-        if (Username.indexOf('@')>=0){
-            CounsellorLogin(Username,Password);
-        }
-        else{
-            ClientLogin(Username, Password);
-        }
-    }
     public void CreateNewAccount (View v){
         // Create the intent which will start your new activity.
         Intent newAcc = new Intent(SignInActivity.this, RegisterActivityChoice.class);
         // Start the new activity.
         startActivity(newAcc);
+    }
+
+    public void ForgotPassword (View v){
+        Intent newAcc = new Intent(SignInActivity.this, ForgotPassword.class);
+        // Start the new activity.
+        startActivity(newAcc);
+
     }
 }
