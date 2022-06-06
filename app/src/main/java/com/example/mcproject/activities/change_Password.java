@@ -51,6 +51,7 @@ public class change_Password extends AppCompatActivity {
             else{
                 ClientPassword(NewPass);
             }
+            Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_LONG).show();
             Intent newAcc = new Intent(change_Password.this, SignInActivity.class);
             startActivity(newAcc);
         }else
