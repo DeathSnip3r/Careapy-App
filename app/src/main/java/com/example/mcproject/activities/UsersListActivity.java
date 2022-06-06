@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mcproject.R;
 import com.example.mcproject.activities.adapters.UserAdapter;
@@ -50,6 +53,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
         Current_ID = Current_ID.replaceAll("\"", "");
         User_ID = users.getStringExtra("User_ID");
         Type = users.getStringExtra("Type");
+        setListener();
         if (Type.equals("Counsellor")) {
 
             OkHttpClient client = new OkHttpClient();
@@ -296,7 +300,28 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
             binding.progressBar.setVisibility(View.INVISIBLE);
         }
     }
-
+    private void moreOptions(){
+        PopupMenu popupMenu = new PopupMenu(UsersListActivity.this, binding.imageMoreOptions);
+        popupMenu.getMenuInflater().inflate(R.menu.userlistmenu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.item_LogOut:
+                        Toast.makeText(getApplicationContext(), "Log Out Successful", Toast.LENGTH_LONG).show();
+                        Intent logOut = new Intent(UsersListActivity.this, SignInActivity.class);
+                        startActivity(logOut);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popupMenu.show();
+    }
+    private void setListener(){
+        binding.imageMoreOptions.setOnClickListener(view -> moreOptions());
+    }
 
     @Override
     public void onClickUsers(Users users) {
