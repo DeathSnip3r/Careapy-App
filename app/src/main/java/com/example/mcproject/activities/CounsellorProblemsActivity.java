@@ -3,7 +3,6 @@ package com.example.mcproject.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -23,6 +22,7 @@ import okhttp3.Response;
 
 public class CounsellorProblemsActivity extends AppCompatActivity {
     String Counsellor_ID;
+    String BackupPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_counsellor_problems);
         Intent regAcc = getIntent();
         Counsellor_ID = regAcc.getStringExtra("Counsellor_ID");
+        BackupPin = regAcc.getStringExtra("Counsellor_ID");
 
     }
 
@@ -139,7 +140,8 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
         }
         else {
             // Create the intent which will start your new activity.
-            Intent RegCoun = new Intent(CounsellorProblemsActivity.this, SignInActivity.class);
+            Intent RegCoun = new Intent(CounsellorProblemsActivity.this, WelcomeCounsellor.class);
+            RegCoun.putExtra("Backup Pin", BackupPin);
             // Start the new activity.
             startActivity(RegCoun);
         }     

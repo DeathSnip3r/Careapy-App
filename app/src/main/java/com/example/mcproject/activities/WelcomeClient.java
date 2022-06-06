@@ -22,6 +22,7 @@ public class WelcomeClient extends AppCompatActivity {
     String Client_ID;
     String Religion;
     String Language;
+    String BackupPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class WelcomeClient extends AppCompatActivity {
         Client_ID = Client_ID.replaceAll("[\\n\\t ]", "");
         Religion = regAcc1.getStringExtra("Client_Religion_Selected");
         Language = regAcc1.getStringExtra("Client_Language");
+        BackupPin = regAcc1.getStringExtra("Backup Pin");
         assignCounsellor();
 
 

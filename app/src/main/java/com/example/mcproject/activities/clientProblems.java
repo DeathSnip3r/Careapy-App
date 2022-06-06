@@ -24,6 +24,7 @@ public class clientProblems extends AppCompatActivity {
     String Client_ID;
     String Religion;
     String Language;
+    String BackupPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class clientProblems extends AppCompatActivity {
         Client_ID = regAcc.getStringExtra("Client_ID");
         Religion = regAcc.getStringExtra("Client_Religion_Selected");
         Language = regAcc.getStringExtra("Client_Language");
+        BackupPin = regAcc.getStringExtra("Backup Pin");
     }
     public void FinishRegClient(View v){
 
@@ -146,6 +148,7 @@ public class clientProblems extends AppCompatActivity {
                     RegCoun1 .putExtra("Client_ID", Client_ID);
                     RegCoun1 .putExtra("Client_Religion_Selected", Religion);
                     RegCoun1 .putExtra("Client_Language", Language);
+                    RegCoun1.putExtra("Backup Pin", BackupPin);
                     startActivity(RegCoun1);
                 }
             }

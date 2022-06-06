@@ -171,6 +171,7 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
                             ClientProblems .putExtra("Client_ID", Client_ID);
                             ClientProblems .putExtra("Client_Religion_Selected", religion);
                             ClientProblems .putExtra("Client_Language", language);
+                            ClientProblems .putExtra("Backup Pin", SafetyPin);
 
                             // Start the new activity.
                             startActivity(ClientProblems);
