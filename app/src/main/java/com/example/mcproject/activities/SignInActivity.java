@@ -80,7 +80,7 @@ public class SignInActivity extends AppCompatActivity {
                                 String Current_ID = myResponse.split(",")[0];
                                 String User_ID= myResponse.split(",")[1];
                                 Intent newAcc = new Intent(SignInActivity.this, UsersListActivity.class);
-                                startActivity(newAcc);
+                                //startActivity(newAcc);
                                 newAcc.putExtra("Current_ID", Current_ID);
                                 newAcc.putExtra("User_ID", User_ID);
                                 newAcc.putExtra("Type","Client");
@@ -128,7 +128,7 @@ public class SignInActivity extends AppCompatActivity {
                             String Current_ID = myResponse.split(",")[0];
                             String User_ID= myResponse.split(",")[1];
                             Intent newAcc = new Intent(SignInActivity.this, UsersListActivity.class);
-                            startActivity(newAcc);
+                            //startActivity(newAcc);
                             newAcc.putExtra("Current_ID", Current_ID);
                             newAcc.putExtra("User_ID", User_ID);
                             newAcc.putExtra("Type","Counsellor");

@@ -244,6 +244,35 @@ public class ChatActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()){
                         case R.id.item_ClearChat:
                             //php script to clear chat
+                            OkHttpClient client = new OkHttpClient();
+
+                            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/delete_chat.php?").newBuilder();
+                            urlBuilder.addQueryParameter("Chat_ID",Chat_ID );
+                            String url = urlBuilder.build().toString();
+
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            client.newCall(request).enqueue(new Callback() {
+                                @Override
+                                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                                    e.printStackTrace();
+                                }
+                                @Override
+                                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                                    if (response.isSuccessful()) {
+                                        ChatActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                // should send message to database
+                                                Intent newAcc = new Intent(ChatActivity.this, UsersListActivity.class);
+                                                startActivity(newAcc);
+
+                                            }
+                                        });
+                                    }
+                                }
+                            });
                             return true;
                         default:
                             return false;
