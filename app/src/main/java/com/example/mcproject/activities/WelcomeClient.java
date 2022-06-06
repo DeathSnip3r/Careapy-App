@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.example.mcproject.R;
@@ -34,9 +35,15 @@ public class WelcomeClient extends AppCompatActivity {
         Religion = regAcc1.getStringExtra("Client_Religion_Selected");
         Language = regAcc1.getStringExtra("Client_Language");
         BackupPin = regAcc1.getStringExtra("Backup Pin");
-        assignCounsellor();
-
-
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                assignCounsellor();
+            }
+        }, 5000);
+        
     }
 
     public void LoadPage(View v){
