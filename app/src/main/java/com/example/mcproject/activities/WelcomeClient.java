@@ -50,7 +50,6 @@ public class WelcomeClient extends AppCompatActivity {
 
     public void assignCounsellor(){
         OkHttpClient client = new OkHttpClient();
-
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2465557/match_algorithm.php?").newBuilder();
         urlBuilder.addQueryParameter("Client_ID", Client_ID);
         urlBuilder.addQueryParameter("Client_Language", Language);
