@@ -33,7 +33,7 @@
     <string name="sign_in">Sign In</string>
     <string name="or">or</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="create_new_account">Create New Account</string>
+    <string name="create_new_account">Create A New Account</string>
     <string name="log_in_to_continue">Log in to continue</string>
     <string name="log_in">Log in</string>
     <string name="select_language">Select Language</string>
@@ -65,4 +65,10 @@
     <string name="backup_pin">Backup Pin</string>
     <string name="log_out">Log Out</string>
     <string name="what_problems_do_you_specialise_in">What problems do you specialise in?</string>
+    <string name="welcome_to_careapy">Welcome to Careapy!</string>
+    <string name="welcome_to_careapy_">Welcome to Careapy</string>
+    <string name="your_assigned_counsellor_is">Your assigned counsellor is:</string>
+    <string name="your_backup_pin_is">Your Backup Pin is:</string>
+    <string name="store_your_backup_pin_in_a_safe_place_in_order_to_recover_your_account">Store your Backup Pin in a safe place in order to recover your account</string>
+    <string name="note_please_ensure_you_treat_your_counsellor_with_respect_all_information_will_be_treated_as_confidential_at_all_times_any_violation_of_our_rules_will_result_in_a_permanent_ban_of_your_account">Note: Please ensure you treat your counsellor with respect. All information will be treated as confidential at all times. Any violation of our rules will result in a permanent ban of your account.</string>
 </resources>
