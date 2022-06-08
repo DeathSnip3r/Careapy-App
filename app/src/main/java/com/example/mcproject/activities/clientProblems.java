@@ -7,7 +7,6 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.mcproject.R;
@@ -27,8 +26,6 @@ public class clientProblems extends AppCompatActivity {
     String Religion;
     String Language;
     String BackupPin;
-    MaterialCardView ADD = (MaterialCardView) findViewById(R.id.cardAddiction);
-    MaterialCardView ANM = (MaterialCardView) findViewById(R.id.cardAnger);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,36 +38,30 @@ public class clientProblems extends AppCompatActivity {
         BackupPin = regAcc.getStringExtra("Backup Pin");
 
         //set onclicklistener for cardviews
-
-        ADD.setOnLongClickListener(view -> {
-            ADD.setChecked(!ADD.isChecked());
-            return true;
-        });
-
-        ANM.setOnLongClickListener(view -> {
-            ANM.setChecked(!ANM.isChecked());
-            return true;
-        });
+        SetListeners();
     }
 
     public void FinishRegClient(View v){
+
+        MaterialCardView ADD = (MaterialCardView) findViewById(R.id.cardAddiction);
+        MaterialCardView ANM = (MaterialCardView) findViewById(R.id.cardAnger);
+        MaterialCardView ANX = (MaterialCardView) findViewById(R.id.cardAnxiety);
+        MaterialCardView CAD = (MaterialCardView) findViewById(R.id.cardCareer);
+        MaterialCardView DEP = (MaterialCardView) findViewById(R.id.cardDepression);
+        MaterialCardView EAD = (MaterialCardView) findViewById(R.id.cardEating);
+        MaterialCardView FAC = (MaterialCardView) findViewById(R.id.cardFamily);
+        MaterialCardView GRL = (MaterialCardView) findViewById(R.id.cardGrief);
+        MaterialCardView LGB = (MaterialCardView) findViewById(R.id.cardLGBTQ);
+        MaterialCardView MID = (MaterialCardView) findViewById(R.id.cardMental);
+        MaterialCardView PAR = (MaterialCardView) findViewById(R.id.cardParenting);
+        MaterialCardView REL = (MaterialCardView) findViewById(R.id.cardRelationship);
+        MaterialCardView SEE = (MaterialCardView) findViewById(R.id.cardSelf);
+        MaterialCardView SLD = (MaterialCardView) findViewById(R.id.cardSleep);
+        MaterialCardView STR = (MaterialCardView) findViewById(R.id.cardStress);
+        MaterialCardView TRA = (MaterialCardView) findViewById(R.id.cardTrauma);
     
                 String problem;
                 int Count=0;
-                CheckBox ANX = (CheckBox) findViewById(R.id.cbxAnxiety);
-                CheckBox CAD = (CheckBox) findViewById(R.id.cbxCareer);
-                CheckBox DEP = (CheckBox) findViewById(R.id.cbxDepression);
-                CheckBox EAD = (CheckBox) findViewById(R.id.cbxEating);
-                CheckBox FAC = (CheckBox) findViewById(R.id.cbxFamily);
-                CheckBox GRL = (CheckBox) findViewById(R.id.cbxGrief);
-                CheckBox LGB = (CheckBox) findViewById(R.id.cbxLGBTQ);
-                CheckBox MID = (CheckBox) findViewById(R.id.cbxMental);
-                CheckBox PAR = (CheckBox) findViewById(R.id.cbxParenting);
-                CheckBox REL = (CheckBox) findViewById(R.id.cbxRelationship);
-                CheckBox SEE = (CheckBox) findViewById(R.id.cbxSelf);
-                CheckBox SLD = (CheckBox) findViewById(R.id.cbxSleeping);
-                CheckBox STR = (CheckBox) findViewById(R.id.cbxStress);
-                CheckBox TRA = (CheckBox) findViewById(R.id.cbxTrauma);
 
                 if (ADD.isChecked()){
                     problem = "ADD";
@@ -167,7 +158,74 @@ public class clientProblems extends AppCompatActivity {
                 }
             }
 
+    public void SetListeners(){
+        MaterialCardView ADD = (MaterialCardView) findViewById(R.id.cardAddiction);
+        MaterialCardView ANM = (MaterialCardView) findViewById(R.id.cardAnger);
+        MaterialCardView ANX = (MaterialCardView) findViewById(R.id.cardAnxiety);
+        MaterialCardView CAD = (MaterialCardView) findViewById(R.id.cardCareer);
+        MaterialCardView DEP = (MaterialCardView) findViewById(R.id.cardDepression);
+        MaterialCardView EAD = (MaterialCardView) findViewById(R.id.cardEating);
+        MaterialCardView FAC = (MaterialCardView) findViewById(R.id.cardFamily);
+        MaterialCardView GRL = (MaterialCardView) findViewById(R.id.cardGrief);
+        MaterialCardView LGB = (MaterialCardView) findViewById(R.id.cardLGBTQ);
+        MaterialCardView MID = (MaterialCardView) findViewById(R.id.cardMental);
+        MaterialCardView PAR = (MaterialCardView) findViewById(R.id.cardParenting);
+        MaterialCardView REL = (MaterialCardView) findViewById(R.id.cardRelationship);
+        MaterialCardView SEE = (MaterialCardView) findViewById(R.id.cardSelf);
+        MaterialCardView SLD = (MaterialCardView) findViewById(R.id.cardSleep);
+        MaterialCardView STR = (MaterialCardView) findViewById(R.id.cardStress);
+        MaterialCardView TRA = (MaterialCardView) findViewById(R.id.cardTrauma);
 
+        ADD.setOnClickListener(view -> {
+            ADD.setChecked(!ADD.isChecked());
+        });
+        ANM.setOnClickListener(view -> {
+            ANM.setChecked(!ANM.isChecked());
+        });
+        ANX.setOnClickListener(view -> {
+            ANX.setChecked(!ANX.isChecked());
+        });
+        CAD.setOnClickListener(view -> {
+            CAD.setChecked(!CAD.isChecked());
+        });
+        DEP.setOnClickListener(view -> {
+            DEP.setChecked(!DEP.isChecked());
+        });
+        EAD.setOnClickListener(view -> {
+            EAD.setChecked(!EAD.isChecked());
+        });
+        FAC.setOnClickListener(view -> {
+            FAC.setChecked(!FAC.isChecked());
+        });
+        GRL.setOnClickListener(view -> {
+            GRL.setChecked(!GRL.isChecked());
+        });
+        LGB.setOnClickListener(view -> {
+            LGB.setChecked(!LGB.isChecked());
+        });
+        MID.setOnClickListener(view -> {
+            MID.setChecked(!MID.isChecked());
+        });
+        PAR.setOnClickListener(view -> {
+            PAR.setChecked(!PAR.isChecked());
+        });
+        REL.setOnClickListener(view -> {
+            REL.setChecked(!REL.isChecked());
+        });
+        SEE.setOnClickListener(view -> {
+            SEE.setChecked(!SEE.isChecked());
+        });
+        SLD.setOnClickListener(view -> {
+            SLD.setChecked(!SLD.isChecked());
+        });
+        STR.setOnClickListener(view -> {
+            STR.setChecked(!STR.isChecked());
+        });
+        TRA.setOnClickListener(view -> {
+            TRA.setChecked(!TRA.isChecked());
+        });
+
+    }
 
     public void addproblem(String Problem){
         OkHttpClient client = new OkHttpClient();
