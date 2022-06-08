@@ -54,7 +54,7 @@
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom|center_horizontal"
@@ -81,7 +81,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/anger_management"
@@ -108,7 +108,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/anxiety"
@@ -135,7 +135,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/career_difficulties"
@@ -162,7 +162,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/depression"
@@ -189,7 +189,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/eating_disorders"
@@ -216,7 +216,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/family_conflict"
@@ -243,7 +243,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/grief_and_loss"
@@ -270,7 +270,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/lgbtq_related_issues"
@@ -297,7 +297,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/mental_illness"
@@ -324,7 +324,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/parenting_issues"
@@ -351,7 +351,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/relationship_issues"
@@ -378,7 +378,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/self_esteem_issues"
@@ -405,7 +405,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/sleeping_disorders"
@@ -432,7 +432,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/stress"
@@ -459,7 +459,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/trauma_and_abuse"
