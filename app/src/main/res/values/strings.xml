@@ -64,4 +64,5 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="backup_pin">Backup Pin</string>
     <string name="log_out">Log Out</string>
+    <string name="what_problems_do_you_specialise_in">What problems do you specialise in?</string>
 </resources>

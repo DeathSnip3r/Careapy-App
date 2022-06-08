@@ -224,7 +224,6 @@ public class clientProblems extends AppCompatActivity {
         TRA.setOnClickListener(view -> {
             TRA.setChecked(!TRA.isChecked());
         });
-
     }
 
     public void addproblem(String Problem){

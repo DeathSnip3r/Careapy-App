@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:text="@string/what_led_you_to_consider_counselling_today"
             android:textAlignment="center"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/primary"
             android:textSize="@dimen/_17ssp"
             android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Select "
+            android:text="Select as many that are applicable"
             android:textAlignment="center"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/_12ssp"
