@@ -2,6 +2,7 @@ package com.example.mcproject.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.mcproject.R;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.IOException;
 
@@ -25,6 +27,8 @@ public class clientProblems extends AppCompatActivity {
     String Religion;
     String Language;
     String BackupPin;
+    MaterialCardView ADD = (MaterialCardView) findViewById(R.id.cardAddiction);
+    MaterialCardView ANM = (MaterialCardView) findViewById(R.id.cardAnger);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +39,25 @@ public class clientProblems extends AppCompatActivity {
         Religion = regAcc.getStringExtra("Client_Religion_Selected");
         Language = regAcc.getStringExtra("Client_Language");
         BackupPin = regAcc.getStringExtra("Backup Pin");
-    }
-    public void FinishRegClient(View v){
 
+        //set onclicklistener for cardviews
+
+        ADD.setOnLongClickListener(view -> {
+            ADD.setChecked(!ADD.isChecked());
+            return true;
+        });
+
+        ANM.setOnLongClickListener(view -> {
+            ANM.setChecked(!ANM.isChecked());
+            return true;
+        });
+    }
+
+    public void FinishRegClient(View v){
     
                 String problem;
                 int Count=0;
-                CheckBox ADD = (CheckBox) findViewById(R.id.cbxAddiction);
                 CheckBox ANX = (CheckBox) findViewById(R.id.cbxAnxiety);
-                CheckBox ANM = (CheckBox) findViewById(R.id.cbxAnger);
                 CheckBox CAD = (CheckBox) findViewById(R.id.cbxCareer);
                 CheckBox DEP = (CheckBox) findViewById(R.id.cbxDepression);
                 CheckBox EAD = (CheckBox) findViewById(R.id.cbxEating);

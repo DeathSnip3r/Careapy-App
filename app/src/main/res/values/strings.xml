@@ -60,4 +60,8 @@
     <string name="message">Message</string>
     <string name="clear_chat">Clear Chat</string>
     <string name="chats">Chats</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="backup_pin">Backup Pin</string>
+    <string name="log_out">Log Out</string>
 </resources>

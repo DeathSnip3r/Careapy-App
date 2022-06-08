@@ -33,6 +33,7 @@
                motion:motionTarget="@+id/logoSplash"
                motion:framePosition="60"
                android:scaleY="1" />
+
        </KeyFrameSet>
     </Transition>
 

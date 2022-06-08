@@ -12,6 +12,7 @@
     <color name="Blue">#FF0645AD</color>
     <color name="icon">#96D294</color>
     <color name="received_message_background">#696969</color>
-    <color name="gradientstart">#FF134509</color>
-    <color name="gradientend">#FF30871F</color>
+    <color name="gradient_start">#FF134509</color>
+    <color name="gradient_end">#FF30871F</color>
+    <color name="pastel">#FF90EE90</color>
 </resources>
