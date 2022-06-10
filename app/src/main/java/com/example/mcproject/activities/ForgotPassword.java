@@ -85,6 +85,7 @@ public class ForgotPassword extends AppCompatActivity {
                             newAcc.putExtra("Type","Counsellor");
                             // Start the new activity.
                             startActivity(newAcc);
+                            finish();
                         }
                     }
                 });
@@ -132,6 +133,7 @@ public class ForgotPassword extends AppCompatActivity {
                             newAcc.putExtra("Type","Client");
                             // Start the new activity.
                             startActivity(newAcc);
+                            finish();
                         }
                     }
                 });
