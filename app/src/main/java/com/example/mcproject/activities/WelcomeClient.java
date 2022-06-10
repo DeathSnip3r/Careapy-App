@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.mcproject.R;
 
@@ -43,15 +44,16 @@ public class WelcomeClient extends AppCompatActivity {
                 assignCounsellor();
             }
         }, 5000);
-        
+        TextView pin = findViewById(R.id.backUpPin);
+        pin.setText(BackupPin);
     }
 
     public void LoadPage(View v){
-
         addchat();
         Intent RegClient = new Intent(WelcomeClient.this, SignInActivity.class);
          //Start the new activity.
         startActivity(RegClient);
+        finish();
 
     }
 
@@ -75,10 +77,19 @@ public class WelcomeClient extends AppCompatActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                final String myResponse = response.body().string();
+                WelcomeClient.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView icon = findViewById(R.id.welcomeIcon);
+                        icon.setText(String.valueOf(myResponse.charAt(0)));
+                        TextView name = findViewById(R.id.counsellorName);
+                        name.setText(myResponse);
+                    }
+                });
 
             }
         });
-
     }
 
     public void addchat(){

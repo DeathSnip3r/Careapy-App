@@ -221,6 +221,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                             Intent CounProbs = new Intent(RegisterActivityCounsellor.this, CounsellorProblemsActivity.class);
                             CounProbs.putExtra("Counsellor_ID", Counsellor_ID);
                             CounProbs.putExtra("Backup Pin", Safetypin);
+                            CounProbs.putExtra("Name", name);
                             // Start the new activity.
                             startActivity(CounProbs);
                         }

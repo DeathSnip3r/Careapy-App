@@ -24,6 +24,7 @@ import okhttp3.Response;
 public class CounsellorProblemsActivity extends AppCompatActivity {
     String Counsellor_ID;
     String BackupPin;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
         Intent regAcc = getIntent();
         Counsellor_ID = regAcc.getStringExtra("Counsellor_ID");
         BackupPin = regAcc.getStringExtra("Counsellor_ID");
+        name = regAcc.getStringExtra("Name");
 
         //set onclicklistener for cardviews
         SetListeners();
@@ -146,6 +148,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
             // Create the intent which will start your new activity.
             Intent RegCoun = new Intent(CounsellorProblemsActivity.this, WelcomeCounsellor.class);
             RegCoun.putExtra("Backup Pin", BackupPin);
+            RegCoun.putExtra("Name",name);
             // Start the new activity.
             startActivity(RegCoun);
         }     

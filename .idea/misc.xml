@@ -53,6 +53,9 @@
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/item_container_sent_message.xml" value="0.1453900709219858" />
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/layout/item_container_user.xml" value="0.5594405594405595" />
         <entry key="..\:/Mobile Computing/MC_Project/app/src/main/res/menu/more_options.xml" value="0.1" />
+        <entry key="..\:/Mobile Computing/MC_Project_Final/app/src/main/res/layout/activity_sign_in.xml" value="0.358695652173913" />
+        <entry key="..\:/Mobile Computing/MC_Project_Final/app/src/main/res/layout/activity_welcom_client.xml" value="0.358695652173913" />
+        <entry key="..\:/Mobile Computing/MC_Project_Final/app/src/main/res/layout/activity_welcome_counsellor.xml" value="0.358695652173913" />
       </map>
     </option>
   </component>
