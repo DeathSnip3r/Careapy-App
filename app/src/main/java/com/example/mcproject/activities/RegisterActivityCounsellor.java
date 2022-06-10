@@ -224,6 +224,7 @@ public class RegisterActivityCounsellor extends AppCompatActivity implements Ada
                             CounProbs.putExtra("Name", name);
                             // Start the new activity.
                             startActivity(CounProbs);
+                            finish();
                         }
                     }
                 });

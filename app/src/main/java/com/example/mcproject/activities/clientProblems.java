@@ -155,6 +155,7 @@ public class clientProblems extends AppCompatActivity {
                     RegCoun1 .putExtra("Client_Language", Language);
                     RegCoun1.putExtra("Backup Pin", BackupPin);
                     startActivity(RegCoun1);
+                    finish();
                 }
             }
 

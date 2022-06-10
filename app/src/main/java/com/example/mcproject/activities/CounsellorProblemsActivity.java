@@ -32,7 +32,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_counsellor_problems);
         Intent regAcc = getIntent();
         Counsellor_ID = regAcc.getStringExtra("Counsellor_ID");
-        BackupPin = regAcc.getStringExtra("Counsellor_ID");
+        BackupPin = regAcc.getStringExtra("Backup Pin");
         name = regAcc.getStringExtra("Name");
 
         //set onclicklistener for cardviews
@@ -151,6 +151,7 @@ public class CounsellorProblemsActivity extends AppCompatActivity {
             RegCoun.putExtra("Name",name);
             // Start the new activity.
             startActivity(RegCoun);
+            finish();
         }     
 
 
