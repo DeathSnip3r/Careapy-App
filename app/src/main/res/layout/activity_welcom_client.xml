@@ -55,7 +55,7 @@
                 app:layout_constraintBaseline_toTopOf="parent"
                 app:riv_oval="true"/>
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/welcomeIcon"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:textColor="@color/white"
@@ -70,7 +70,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="Aidan"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
@@ -89,7 +88,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="1010"
             android:textColor="@color/black"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold" />

@@ -175,6 +175,7 @@ public class RegisterActivityClient extends AppCompatActivity implements Adapter
 
                             // Start the new activity.
                             startActivity(ClientProblems);
+                            finish();
                         }
                     }
                 });

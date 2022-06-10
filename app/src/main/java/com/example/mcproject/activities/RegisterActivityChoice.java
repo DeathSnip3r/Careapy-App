@@ -31,6 +31,7 @@ public class RegisterActivityChoice extends AppCompatActivity {
         Intent RegisterClient = new Intent(RegisterActivityChoice.this, RegisterActivityClient.class);
         // Start the new activity.
         startActivity(RegisterClient);
+        finish();
     }
 
 }
