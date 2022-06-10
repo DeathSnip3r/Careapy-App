@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="@drawable/background_splash"
     android:id="@+id/motionLayout"
     app:layoutDescription="@xml/activity_startup_animated_splash_scene"
     tools:context=".activities.startupAnimatedSplash">

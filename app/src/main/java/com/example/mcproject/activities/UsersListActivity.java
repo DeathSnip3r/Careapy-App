@@ -311,6 +311,7 @@ public class UsersListActivity extends AppCompatActivity implements UserListener
                         Toast.makeText(getApplicationContext(), "Log Out Successful", Toast.LENGTH_LONG).show();
                         Intent logOut = new Intent(UsersListActivity.this, SignInActivity.class);
                         startActivity(logOut);
+                        finish();
                         return true;
                     default:
                         return false;
